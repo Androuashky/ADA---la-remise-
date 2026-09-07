@@ -25,3 +25,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+BACK_END/db/seed.sql
+BACK_END/db/migration_down.sql
