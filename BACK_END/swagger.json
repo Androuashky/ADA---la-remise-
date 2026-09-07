@@ -1,0 +1,513 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API La Remise",
+    "description": "API REST de la ressourcerie associative La Remise — objets, dépôts, personnes, catégories et statistiques.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/objets": {
+      "get": {
+        "summary": "Liste des objets",
+        "description": "Liste des objets avec leur catégorie, filtrable par statut et catégorie.",
+        "parameters": [
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "description": "Filtre par statut : arrive, en_reparation, en_rayon, vendu, recycle",
+            "schema": {
+              "type": "string",
+              "enum": ["arrive", "en_reparation", "en_rayon", "vendu", "recycle"]
+            }
+          },
+          {
+            "name": "categorie_id",
+            "in": "query",
+            "required": false,
+            "description": "Filtre par identifiant de catégorie",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des objets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ObjetAvecCategorie"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      }
+    },
+    "/objets/{id}": {
+      "get": {
+        "summary": "Détail d'un objet",
+        "description": "Un objet avec sa catégorie, son dépôt et le nom de sa donatrice.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant de l'objet",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détail de l'objet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjetDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Objet non trouvé"
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      }
+    },
+    "/objets/{id}/statut": {
+      "patch": {
+        "summary": "Modifier le statut d'un objet",
+        "description": "Fait évoluer le statut d'un objet (arrivé, en réparation, en rayon, vendu, recyclé). Le prix est optionnel.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant de l'objet",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["statut"],
+                "properties": {
+                  "statut": {
+                    "type": "string",
+                    "enum": ["arrive", "en_reparation", "en_rayon", "vendu", "recycle"]
+                  },
+                  "prix": {
+                    "type": "number",
+                    "description": "Prix de vente (optionnel, conservé si absent)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Objet mis à jour",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Objet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Statut manquant ou invalide"
+          },
+          "404": {
+            "description": "Objet non trouvé"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "Liste des catégories",
+        "description": "Toutes les catégories d'objets.",
+        "responses": {
+          "200": {
+            "description": "Liste des catégories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categorie"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      }
+    },
+    "/depots": {
+      "post": {
+        "summary": "Enregistrer un dépôt",
+        "description": "Crée un nouveau dépôt (boutique ou domicile).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["personne_id", "type"],
+                "properties": {
+                  "personne_id": {
+                    "type": "integer",
+                    "description": "Identifiant de la donatrice"
+                  },
+                  "date_depot": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date du dépôt (par défaut : aujourd'hui)"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": ["boutique", "domicile"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dépôt créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Depot"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Personne ou type manquant"
+          }
+        }
+      }
+    },
+    "/depots/{id}": {
+      "get": {
+        "summary": "Détail d'un dépôt",
+        "description": "Un dépôt avec sa donatrice et la liste des objets qu'il contient.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant du dépôt",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détail du dépôt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DepotDetail"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dépôt non trouvé"
+          }
+        }
+      }
+    },
+    "/depots/{id}/objets": {
+      "post": {
+        "summary": "Ajouter un objet à un dépôt",
+        "description": "Enregistre un objet dans le dépôt. L'état d'arrivée est optionnel.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant du dépôt",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["libelle", "categorie_id"],
+                "properties": {
+                  "libelle": {
+                    "type": "string",
+                    "description": "Nom de l'objet"
+                  },
+                  "poids_kg": {
+                    "type": "number",
+                    "description": "Poids en kilogrammes (optionnel)"
+                  },
+                  "etat_arrivee": {
+                    "type": "string",
+                    "enum": ["bon_etat", "a_reparer", "hors_service"],
+                    "description": "État à l'arrivée (optionnel)"
+                  },
+                  "categorie_id": {
+                    "type": "integer",
+                    "description": "Identifiant de la catégorie"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Objet créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Objet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Libellé ou catégorie manquant, ou état invalide"
+          }
+        }
+      }
+    },
+    "/personnes": {
+      "get": {
+        "summary": "Liste des personnes",
+        "description": "Toutes les personnes (nom, prénom, téléphone, adhérente).",
+        "responses": {
+          "200": {
+            "description": "Liste des personnes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Personne"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      },
+      "post": {
+        "summary": "Créer une personne",
+        "description": "Crée une donatrice. Le téléphone est optionnel.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["nom", "prenom"],
+                "properties": {
+                  "nom": {
+                    "type": "string"
+                  },
+                  "prenom": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string",
+                    "description": "Numéro de téléphone (optionnel)"
+                  },
+                  "adherente": {
+                    "type": "boolean",
+                    "description": "Est adhérente ou non (défaut : false)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Personne créée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personne"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Nom ou prénom manquant"
+          }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "summary": "Indicateurs du tableau de bord",
+        "description": "Répartition des objets par statut, poids total reçu et poids détourné de la déchetterie.",
+        "responses": {
+          "200": {
+            "description": "Indicateurs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stats"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur interne du serveur"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Objet": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "libelle": { "type": "string" },
+          "poids_kg": { "type": "number" },
+          "etat_arrivee": {
+            "type": "string",
+            "enum": ["bon_etat", "a_reparer", "hors_service"]
+          },
+          "statut": {
+            "type": "string",
+            "enum": ["arrive", "en_reparation", "en_rayon", "vendu", "recycle"]
+          },
+          "prix": { "type": "number" },
+          "categorie_id": { "type": "integer" },
+          "depot_id": { "type": "integer" }
+        }
+      },
+      "ObjetAvecCategorie": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "libelle": { "type": "string" },
+          "statut": { "type": "string" },
+          "categorie_id": { "type": "integer" },
+          "depot_id": { "type": "integer" },
+          "libelle_categorie": { "type": "string" }
+        }
+      },
+      "ObjetDetail": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "libelle": { "type": "string" },
+          "categorie_libelle": { "type": "string" },
+          "depot_type": { "type": "string" },
+          "personne_nom": { "type": "string" },
+          "personne_prenom": { "type": "string" }
+        }
+      },
+      "Categorie": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "libelle": { "type": "string" }
+        }
+      },
+      "Depot": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "personne_id": { "type": "integer" },
+          "date_depot": { "type": "string", "format": "date" },
+          "type": { "type": "string", "enum": ["boutique", "domicile"] }
+        }
+      },
+      "DepotDetail": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "personne_id": { "type": "integer" },
+          "date_depot": { "type": "string", "format": "date" },
+          "type": { "type": "string" },
+          "personne_nom": { "type": "string" },
+          "personne_prenom": { "type": "string" },
+          "liste_objet": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "Personne": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "nom": { "type": "string" },
+          "prenom": { "type": "string" },
+          "telephone": { "type": "string" },
+          "adherente": { "type": "boolean" }
+        }
+      },
+      "Stats": {
+        "type": "object",
+        "properties": {
+          "objets_par_statut": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "statut": { "type": "string" },
+                "nombre_objets": { "type": "integer" }
+              }
+            }
+          },
+          "poids_total_recu_kg": { "type": "number" },
+          "poids_detourne_kg": { "type": "number" }
+        }
+      }
+    }
+  }
+}
