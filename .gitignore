@@ -1,5 +1,5 @@
 .env
-.BACK_END/docker-compose.yml
+docker-compose.yml
 
 # Logs
 logs
