@@ -1,3 +1,4 @@
+-- Active: 1788785393086@@127.0.0.1@5433@la-remise_db
 -- =====================================================================
 --  Adatabase — La Remise
 --  migration_up.sql — création des types et des tables
