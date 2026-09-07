@@ -1,3 +1,4 @@
+-- Active: 1788787537364@@127.0.0.1@5433@la-remise_db
 -- =====================================================================
 --  Adatabase — La Remise
 --  seed.sql — jeu de données de référence
