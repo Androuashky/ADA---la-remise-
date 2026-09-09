@@ -3,8 +3,11 @@ import pool from '../db.js';
 
 const objetsRouter = Router();
 
+// --------------------------------------------------
+// GET
+// --------------------------------------------------
 
-// La même liste, filtrée — les deux filtres sont optionnels et cumulables
+// Liste des objets, filtres optionnels et cumulables (statut, categorie_id)
 objetsRouter.get("/", async (req, res, next) => {
     try {
         const result = await pool.query(`
@@ -59,7 +62,7 @@ objetsRouter.get("/:id", async (req, res, next) => {
 // PATCH
 // --------------------------------------------------
 
-// Fait évoluer le statut d’un objet — statut, prix?
+// Fait évoluer le statut d'un objet (statut obligatoire, prix optionnel)
 objetsRouter.patch("/:id/statut", async (req, res, next) => {
     const { statut, prix } = req.body;
     const id = req.params.id;
@@ -79,7 +82,7 @@ objetsRouter.patch("/:id/statut", async (req, res, next) => {
             SET statut = $2::statut_objet, prix = COALESCE($3, prix)
             WHERE id = $1
             RETURNING *;
-          `, [id, statut, prix ?? null] // Prix est optionnel, on garde l'ancien si pas de nouvelle valeur
+          `, [id, statut, prix ?? null] // Prix optionnel : l'ancien est conservé si non renseigné
         );
 
         if (!result.rows[0]) {

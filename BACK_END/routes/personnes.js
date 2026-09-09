@@ -3,7 +3,11 @@ import pool from '../db.js';
 
 const personnesRouter = Router();
 
-// PAGE 5 LISTE DEROULANTE PERSONNE QUI DONNE 
+// --------------------------------------------------
+// GET
+// --------------------------------------------------
+
+// Liste des personnes (pour le choix de la donatrice dans le formulaire de dépôt)
 personnesRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(`
@@ -19,7 +23,11 @@ personnesRouter.get("/", async (req, res) => {
 });
 
 
-// BONUS PAGE 5 AJOUTER UN DONNATEUR 
+// --------------------------------------------------
+// POST
+// --------------------------------------------------
+
+// Création d'une personne (ajout d'une donatrice)
 personnesRouter.post("/", async (req, res) => {
     const { nom, prenom, telephone, adherente } = req.body;
 
