@@ -7,7 +7,7 @@ const categoriesRouter = Router();
 // GET
 // --------------------------------------------------
 
-// Toutes les catégories — id et libelle
+// La liste des catégories pour le menu déroulant du filtre
 categoriesRouter.get("/", async (req, res, next) => {
     try {
         const result = await pool.query(`
