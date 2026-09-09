@@ -2,6 +2,9 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" with { type: "json" };
 import express from "express";
 import cors from "cors";
+import objetsRouter from './routes/objets.js';
+import categoriesRouter from './routes/categories.js';
+import statutsRouter from './routes/statuts.js';
 import depotsRouter from './routes/depots.js';
 import personnesRouter from './routes/personnes.js';
 
@@ -13,7 +16,9 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
+app.use('/api/objets', objetsRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/statuts', statutsRouter);
 app.use('/api/depots', depotsRouter);
 app.use('/api/personnes', personnesRouter);
 

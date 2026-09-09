@@ -1,3 +1,91 @@
+# ---------------------------------------------
+#   GET OBJETS
+# ---------------------------------------------
+
+### 200 - La liste des objets filtrée
+GET http://localhost:3000/api/objets?statut=&categorie_id=
+
+### 200 - La liste des objets filtrée - 1 filtre
+GET http://localhost:3000/api/objets?statut=recycle&categorie_id=
+
+### 200 - La liste des objets filtrée - 2 filtres
+GET http://localhost:3000/api/objets?statut=recycle&categorie_id=2
+
+### 400 - Statut invalide
+GET http://localhost:3000/api/objets?statut=toto&categorie_id=2
+
+### 400 - Categorie_id non numérique
+GET http://localhost:3000/api/objets?statut=recycle&categorie_id=abc
+
+### 200 - L'objet existe
+GET http://localhost:3000/api/objets/2
+
+### 404 - L'objet n'existe pas
+GET http://localhost:3000/api/objets/777
+
+### 400 - L'id de l'objet doit être numérique
+GET http://localhost:3000/api/objets/toto
+
+
+# ---------------------------------------------
+#   GET CATEGORIES
+# ---------------------------------------------
+
+### 200 - La liste des catégories (pour filtre)
+GET http://localhost:3000/api/categories
+
+
+# ---------------------------------------------
+#   GET STATUTS
+# ---------------------------------------------
+
+### 200 - La liste des statuts (pour filtre)
+GET http://localhost:3000/api/statuts
+
+
+# ---------------------------------------------
+#   PATCH OBJETS
+# ---------------------------------------------
+
+### 200 - Faire évoluer le statut d'un objet (statut + prix)
+PATCH http://localhost:3000/api/objets/7/statut
+Content-Type: application/json
+
+{
+  "statut": "en_rayon",
+  "prix": 20
+}
+
+### 200 - Faire évoluer seulement le statut, pas le prix (optionnel), l'ancien est conservé
+PATCH http://localhost:3000/api/objets/7/statut
+Content-Type: application/json
+
+{
+  "statut": "en_rayon"
+}
+
+### 400 - Statut non renseigné
+PATCH http://localhost:3000/api/objets/7/statut
+Content-Type: application/json
+
+{}
+
+### 400 - Statut invalide (n'appartient pas à l'enum statut_objet)
+PATCH http://localhost:3000/api/objets/7/statut
+Content-Type: application/json
+
+{
+  "statut": "en_vente"
+}
+
+### 404 - L'objet n'existe pas
+PATCH http://localhost:3000/api/objets/777/statut
+Content-Type: application/json
+
+{
+  "statut": "en_rayon",
+  "prix": 15
+}
  
 ## PAGE 5 DEPOTS LISTE AFFICHER
 GET http://localhost:3000/api/depots
