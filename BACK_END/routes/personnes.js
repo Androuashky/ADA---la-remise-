@@ -3,11 +3,7 @@ import pool from '../db.js';
 
 const personnesRouter = Router();
 
-// --------------------------------------------------
-// GET
-// --------------------------------------------------
-
-// Toutes les personnes, noms et prénoms, téléphone et s'ils sont adhérents ou non
+// PAGE 5 LISTE DEROULANTE PERSONNE QUI DONNE 
 personnesRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(`
@@ -17,17 +13,13 @@ personnesRouter.get("/", async (req, res) => {
         `);
         res.json(result.rows);
     } catch (err) {
-        console.error("Erreur GET api/categories : ", err.message)
+        console.error("Erreur GET api/personnes : ", err.message)
         res.status(500).json({ error: err.message })
     }
 });
 
 
-// --------------------------------------------------
-// POST
-// --------------------------------------------------
-
-// Crée une donatrice — nom, prenom, telephone?, adherente?
+// BONUS PAGE 5 AJOUTER UN DONNATEUR 
 personnesRouter.post("/", async (req, res) => {
     const { nom, prenom, telephone, adherente } = req.body;
 

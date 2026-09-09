@@ -3,11 +3,25 @@ import pool from '../db.js';
 
 const depotsRouter = Router();
 
-// --------------------------------------------------
-// GET
-// --------------------------------------------------
 
-// Un dépôt, sa donatrice, et la liste des objets qu’il contient
+
+// PAGE 5 DEPOTS LISTE AFFICHER 
+depotsRouter.get("/", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT *, count(objet)
+            FROM depots
+            JOIN objet ON objet.depot_id = depot.id
+            ORDER BY id ASC;
+        `);
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Erreur GET api/depots : ", err.message)
+        res.status(500).json({ error: err.message })
+    }
+});
+
+// PAGE 6 DEPOTS CARTES 
 depotsRouter.get("/:id", async (req, res, next) => {
     try {
         const result = await pool.query(`
@@ -35,11 +49,8 @@ depotsRouter.get("/:id", async (req, res, next) => {
         }
 });
 
-// --------------------------------------------------
-// POST
-// --------------------------------------------------
 
-// Enregistre un dépôt — personne_id, date_depot, type
+// PAGE 5 FORMULAIRE DEPOT
 depotsRouter.post("/", async (req, res, next) => {
     const { personne_id, date_depot, type } = req.body;
 
@@ -61,7 +72,7 @@ depotsRouter.post("/", async (req, res, next) => {
     }
 });
 
-// Ajoute un objet au dépôt — libelle, poids_kg, etat_arrivee, categorie_id
+// PAGE 5 ET 6 AJOUT D'UN OBJET
 depotsRouter.post("/:id/objets", async (req, res, next) => {
     const { libelle, poids_kg, etat_arrivee, categorie_id } = req.body;
     const depot_id = req.params.id;
