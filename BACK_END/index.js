@@ -2,6 +2,8 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" with { type: "json" };
 import express from "express";
 import cors from "cors";
+import depotsRouter from './routes/depots.js';
+import personnesRouter from './routes/personnes.js';
 
 
 const app = express();
@@ -11,6 +13,9 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+
+app.use('/api/depots', depotsRouter);
+app.use('/api/personnes', personnesRouter);
 
 app.use((err, req, res, next) => {
   console.error("Erreur centralisée :", err.stack); // pour debugger : renvoie une chaîne de caractères qui décrit le chemin d'exécution depuis le point où l'erreur a été levée jusqu'à sa capture

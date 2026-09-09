@@ -1,42 +1,11 @@
-# ---------------------------------------------
-#   GET
-# ---------------------------------------------
+ 
+## PAGE 5 DEPOTS LISTE AFFICHER
+GET http://localhost:3000/api/depots
 
-### 200 - Toutes les catégories — id et libelle
-GET http://localhost:3000/api/categories
-
-### 200 - La liste des objets, avec le libellé de leur catégorie
-GET http://localhost:3000/api/objets/
-
-### 200 - Un objet, sa catégorie, son dépôt et le nom de sa donatrice
-GET http://localhost:3000/api/objets/5
-
-### 200 - La même liste, filtrée — 0 filtre
-GET http://localhost:3000/api/objets?statut=&categorie_id=
-
-### 200 - La même liste, filtrée — 1 filtre (statut=recycle)
-GET http://localhost:3000/api/objets?statut=recycle&categorie_id=
-
-### 200 - La même liste, filtrée — 1 filtre (statut=recycle et categorie_id=2 )
-GET http://localhost:3000/api/objets?statut=recycle&categorie_id=2
-
-### 404 - Un objet qui n'existe pas
-GET http://localhost:3000/api/objets/785
-
-### 200 - Un dépôt, sa donatrice, et la liste des objets qu’il contient
+### PAGE 6 DEPOTS CARTE AFFICHER
 GET http://localhost:3000/api/depots/6
 
-### 404 - Un dépôt qui n'existe pas
-GET http://localhost:3000/api/depots/674
-
-### 200 - Trois indicateurs : objets par statut, poids total reçu, poids détourné de la déchetterie
-GET http://localhost:3000/api/stats
-
-# ---------------------------------------------
-#   POST
-# ---------------------------------------------
-
-### 201 - Crée une donatrice — nom, prenom, telephone, adherente
+### BONUS PAGE 5 AJOUTER UN DONNATEUR 
 POST http://localhost:3000/api/personnes
 Content-Type: application/json
 
@@ -47,17 +16,7 @@ Content-Type: application/json
   "adherente": true
 }
 
-### 400 - Crée une donatrice — prenom, telephone, adherente (sans nom)
-POST http://localhost:3000/api/personnes
-Content-Type: application/json
-
-{
-  "prenom": "Yanis",
-  "telephone": "0660172721",
-  "adherente": true
-}
-
-### 201 - Enregistre un dépôt — personne_id, date_depot, type
+### PAGE 5 AJOUTER UN DEPOT
 POST http://localhost:3000/api/depots
 Content-Type: application/json
 
@@ -67,16 +26,8 @@ Content-Type: application/json
   "date_depot": "2026-10-15"
 }
 
-### 400 - Enregistre un dépôt sans personne_id ou type
-POST http://localhost:3000/api/depots
-Content-Type: application/json
 
-{
-  "type": "boutique",
-  "date_depot": "2026-10-15"
-}
-
-### 201 - Ajoute un objet au dépôt — libelle, poids_kg, etat_arrivee, categorie_id
+### PAGE 5 et 6 AJOUTER UN OBJET 
 POST http://localhost:3000/api/depots/5/objets
 Content-Type: application/json
 
@@ -87,57 +38,5 @@ Content-Type: application/json
   "categorie_id": 2
 }
 
-### 404 - Ajoute un objet à un dépôt qui n'existe pas
-POST http://localhost:3000/api/depots/5567/objets
-Content-Type: application/json
 
-{
-  "libelle": "Veste en jean",
-  "poids_kg": 0.8,
-  "etat_arrivee": "bon_etat",
-  "categorie_id": 2
-}
 
-# ---------------------------------------------
-#   PATCH
-# ---------------------------------------------
-
-### 200 - Fait évoluer le statut d'un objet — statut + prix
-PATCH http://localhost:3000/api/objets/7/statut
-Content-Type: application/json
-
-{
-  "statut": "en_rayon",
-  "prix": 20
-}
-
-### 200 - Change le statut sans prix — prix optionnel, l'ancien est conservé
-PATCH http://localhost:3000/api/objets/7/statut
-Content-Type: application/json
-
-{
-  "statut": "en_rayon"
-}
-
-### 400 - Statut non renseigné
-PATCH http://localhost:3000/api/objets/7/statut
-Content-Type: application/json
-
-{}
-
-### 400 - Statut invalide (n'appartient pas à l'enum statut_objet)
-PATCH http://localhost:3000/api/objets/7/statut
-Content-Type: application/json
-
-{
-  "statut": "en_vente"
-}
-
-### 404 - L'objet n'existe pas
-PATCH http://localhost:3000/api/objets/777/statut
-Content-Type: application/json
-
-{
-  "statut": "en_rayon",
-  "prix": 15
-}
