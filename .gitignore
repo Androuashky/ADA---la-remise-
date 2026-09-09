@@ -29,7 +29,6 @@ BACK_END/db/seed.sql
 BACK_END/db/migration_down.sql
 BACK_END/db/seed.sql
 BACK_END/db/migration_down.sql
-FRONT_END/index.html
 FRONT_END/test_front/creation-depot.html
 FRONT_END/test_front/details-depot.html
 FRONT_END/test_front/index.html
@@ -37,5 +36,3 @@ FRONT_END/test_front/index1.html
 FRONT_END/test_front/liste-depots.html
 FRONT_END/test_front/test.html
 FRONT_END/test_front/test1.html
-FRONT_END/index.html
-FRONT_END/index.html

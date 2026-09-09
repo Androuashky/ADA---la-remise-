@@ -86,3 +86,45 @@ Content-Type: application/json
   "statut": "en_rayon",
   "prix": 15
 }
+ 
+## PAGE 5 DEPOTS LISTE AFFICHER
+GET http://localhost:3000/api/depots
+
+### PAGE 6 DEPOTS CARTE AFFICHER
+GET http://localhost:3000/api/depots/6
+
+### BONUS PAGE 5 AJOUTER UN DONNATEUR 
+POST http://localhost:3000/api/personnes
+Content-Type: application/json
+
+{
+  "nom": "Lio",
+  "prenom": "Jean-Paul",
+  "telephone": "0667888890",
+  "adherente": true
+}
+
+### PAGE 5 AJOUTER UN DEPOT
+POST http://localhost:3000/api/depots
+Content-Type: application/json
+
+{
+  "personne_id": 3,
+  "type": "boutique",
+  "date_depot": "2026-10-15"
+}
+
+
+### PAGE 5 et 6 AJOUTER UN OBJET 
+POST http://localhost:3000/api/depots/5/objets
+Content-Type: application/json
+
+{
+  "libelle": "Veste en jean",
+  "poids_kg": 0.8,
+  "etat_arrivee": "bon_etat",
+  "categorie_id": 2
+}
+
+
+

@@ -7,17 +7,24 @@ const objetsRouter = Router();
 // GET
 // --------------------------------------------------
 
-// Liste des objets filtrée
-objetsRouter.get("/", async (req, res, next) => {
-    const { statut, categorie_id } = req.query;
-    const statutsValides = ["arrive", "en_reparation", "en_rayon", "vendu", "recycle"];
+// La liste des objets, avec le libellé de leur catégorie
+// objetsRouter.get("/", async (req, res) => {
+//     try {
+//         const result = await pool.query(`
+//           SELECT
+//           objet.*, categorie.libelle
+//           FROM objet
+//           JOIN categorie ON objet.categorie_id = categorie.id
+//           `);
+//         res.json(result.rows)
+//           } catch (err) {
+//         console.error("Erreur GET api/objets : ", err.message)
+//         res.status(500).json({ error: err.message })
+//     }
+// });
 
-    if (statut && !statutsValides.includes(statut)) {
-        return res.status(400).json({ error: "Statut invalide." });
-    }
-    if (categorie_id && isNaN(Number(categorie_id))) {
-        return res.status(400).json({ error: "categorie_id doit être un nombre." });
-    }
+// La même liste, filtrée — les deux filtres sont optionnels et cumulables
+objetsRouter.get("/", async (req, res, next) => {
     try {
         const result = await pool.query(`
           SELECT
@@ -27,7 +34,7 @@ objetsRouter.get("/", async (req, res, next) => {
           WHERE objet.statut = COALESCE($1::statut_objet, objet.statut)
           AND objet.categorie_id = COALESCE($2::integer, objet.categorie_id)
           ORDER BY objet.id ASC
-          `, [statut || null, categorie_id || null]
+          `, [req.query.statut || null, req.query.categorie_id || null]
         );
 
         res.json(result.rows);
@@ -39,11 +46,6 @@ objetsRouter.get("/", async (req, res, next) => {
 
 // Un objet, sa catégorie, son dépôt et le nom de sa donatrice
 objetsRouter.get("/:id", async (req, res, next) => {
-    const id = Number(req.params.id);
-
-    if (isNaN(id)) {
-        return res.status(400).json({ error: "L'identifiant doit être un nombre." });
-    }
     try {
         const result = await pool.query(`
           SELECT
@@ -58,7 +60,7 @@ objetsRouter.get("/:id", async (req, res, next) => {
           JOIN depot ON objet.depot_id = depot.id
           JOIN personne ON depot.personne_id = personne.id
           WHERE objet.id = $1;
-          `, [id]
+          `, [req.params.id]
         );
 
         if (result.rows.length === 0) {
@@ -79,12 +81,8 @@ objetsRouter.get("/:id", async (req, res, next) => {
 // Fait évoluer le statut d’un objet — statut, prix?
 objetsRouter.patch("/:id/statut", async (req, res, next) => {
     const { statut, prix } = req.body;
-    const id = Number(req.params.id);
+    const id = req.params.id;
     const statuts = ["arrive", "en_reparation", "en_rayon", "vendu", "recycle"];
-
-    if (isNaN(id)) {
-        return res.status(400).json({ error: "L'identifiant doit être un nombre." });
-    }
 
     if (!statut) {
         return res.status(400).json({ error: "Le statut est obligatoire." });
