@@ -5,7 +5,7 @@ import categoriesRouter from './routes/categories.js';
 import statutsRouter from './routes/statuts.js';
 import depotsRouter from './routes/depots.js';
 import personnesRouter from './routes/personnes.js';
-
+import benevoleRouter from './routes/benevole.js';
 
 const app = express();
 
@@ -17,6 +17,7 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/statuts', statutsRouter);
 app.use('/api/depots', depotsRouter);
 app.use('/api/personnes', personnesRouter);
+app.use('/api/benevoles', benevoleRouter);
 
 app.use((err, req, res, next) => {
   console.error("Erreur centralisée :", err.stack); // pour debugger : renvoie une chaîne de caractères qui décrit le chemin d'exécution depuis le point où l'erreur a été levée jusqu'à sa capture
