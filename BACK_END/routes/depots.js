@@ -9,10 +9,12 @@ const depotsRouter = Router();
 depotsRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT *, count(objet)
-            FROM depots
+            SELECT depot.id, depot.date_depot, depot.type, count(objet.id), personne.nom, personne.prenom
+            FROM depot
             JOIN objet ON objet.depot_id = depot.id
-            ORDER BY id ASC;
+            JOIN personne ON depot.personne_id = personne.id
+            GROUP BY depot.id, personne.nom, personne.prenom
+            ORDER BY depot.id;
         `);
         res.json(result.rows);
     } catch (err) {
@@ -29,7 +31,8 @@ depotsRouter.get("/:id", async (req, res, next) => {
             depot.*,
             personne.nom AS personne_nom,
             personne.prenom AS personne_prenom,
-            json_agg(objet.libelle) AS liste_objet
+            json_agg(objet.libelle) AS liste_objet,
+            json_agg(objet.prix) AS liste_objet_prix
             FROM depot
             JOIN personne ON depot.personne_id = personne.id
             JOIN objet ON objet.depot_id = depot.id

@@ -1,15 +1,11 @@
-
-
-// PAGE 5 DEPOTS LISTE AFFICHER 
-##
+ 
+## PAGE 5 DEPOTS LISTE AFFICHER
 GET http://localhost:3000/api/depots
 
-## // PAGE 6 DEPOTS CARTES
+### PAGE 6 DEPOTS CARTE AFFICHER
+GET http://localhost:3000/api/depots/6
 
-GET http://localhost:3000/api/depots/674
-
-##
-// BONUS PAGE 5 AJOUTER UN DONNATEUR 
+### BONUS PAGE 5 AJOUTER UN DONNATEUR 
 POST http://localhost:3000/api/personnes
 Content-Type: application/json
 
@@ -20,7 +16,7 @@ Content-Type: application/json
   "adherente": true
 }
 
-### 201 - Enregistre un dépôt — personne_id, date_depot, type
+### PAGE 5 AJOUTER UN DEPOT
 POST http://localhost:3000/api/depots
 Content-Type: application/json
 
