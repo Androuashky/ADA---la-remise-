@@ -8,9 +8,9 @@ benevoleRouter.get("/", async (req, res, next) => {
 
     try {
          const result = await pool.query(`
-            SELECT *
+            SELECT nom, prenom
             FROM benevole
-            ORDER BY id ASC`)
+            ORDER BY nom ASC`)
 
             res.json(result.rows);
 

@@ -1,1 +1,1 @@
-GET http://localhost:3000/benevole
+GET http://localhost:3000/api/benevole
