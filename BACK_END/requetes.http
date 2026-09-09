@@ -152,3 +152,16 @@ Content-Type: application/json
 
 ### 200 - Liste des bénévoles (pour l'écran « Qui es-tu ? »)
 GET http://localhost:3000/api/benevoles
+
+# ---------------------------------------------
+#   GET /api/stats
+# ---------------------------------------------
+
+### 200 - Nombre d'objets par statut
+GET http://localhost:3000/api/stats/par-statut
+
+### 200 - Poids total reçu (en kg)
+GET http://localhost:3000/api/stats/poids-total
+
+### 200 - Nombre d'objets en rayon
+GET http://localhost:3000/api/stats/en-rayon
