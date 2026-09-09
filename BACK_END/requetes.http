@@ -27,6 +27,16 @@ Content-Type: application/json
 }
 
 
+### PAGE 5 et 6 AJOUTER UN OBJET 
+POST http://localhost:3000/api/depots/5/objets
+Content-Type: application/json
+
+{
+  "libelle": "Veste en jean",
+  "poids_kg": 0.8,
+  "etat_arrivee": "bon_etat",
+  "categorie_id": 2
+}
 
 
 
