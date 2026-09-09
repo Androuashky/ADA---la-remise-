@@ -1,20 +1,24 @@
+# ==================================================
+#   API La Remise — Requêtes de test
+# ==================================================
+
 # ---------------------------------------------
-#   GET OBJETS
+#   GET /api/objets
 # ---------------------------------------------
 
-### 200 - La liste des objets filtrée
+### 200 - Liste des objets sans filtre
 GET http://localhost:3000/api/objets?statut=&categorie_id=
 
-### 200 - La liste des objets filtrée - 1 filtre
+### 200 - Liste des objets filtrée par statut
 GET http://localhost:3000/api/objets?statut=recycle&categorie_id=
 
-### 200 - La liste des objets filtrée - 2 filtres
+### 200 - Liste des objets filtrée par statut et catégorie
 GET http://localhost:3000/api/objets?statut=recycle&categorie_id=2
 
 ### 400 - Statut invalide
 GET http://localhost:3000/api/objets?statut=toto&categorie_id=2
 
-### 400 - Categorie_id non numérique
+### 400 - categorie_id non numérique
 GET http://localhost:3000/api/objets?statut=recycle&categorie_id=abc
 
 ### 200 - L'objet existe
@@ -23,31 +27,28 @@ GET http://localhost:3000/api/objets/2
 ### 404 - L'objet n'existe pas
 GET http://localhost:3000/api/objets/777
 
-### 400 - L'id de l'objet doit être numérique
+### 400 - L'id doit être numérique
 GET http://localhost:3000/api/objets/toto
 
-
 # ---------------------------------------------
-#   GET CATEGORIES
+#   GET /api/categories
 # ---------------------------------------------
 
-### 200 - La liste des catégories (pour filtre)
+### 200 - Liste des catégories (pour le filtre)
 GET http://localhost:3000/api/categories
 
-
 # ---------------------------------------------
-#   GET STATUTS
+#   GET /api/statuts
 # ---------------------------------------------
 
-### 200 - La liste des statuts (pour filtre)
+### 200 - Liste des statuts (pour le filtre)
 GET http://localhost:3000/api/statuts
 
-
 # ---------------------------------------------
-#   PATCH OBJETS
+#   PATCH /api/objets/:id/statut
 # ---------------------------------------------
 
-### 200 - Faire évoluer le statut d'un objet (statut + prix)
+### 200 - Changement de statut et de prix
 PATCH http://localhost:3000/api/objets/7/statut
 Content-Type: application/json
 
@@ -56,7 +57,7 @@ Content-Type: application/json
   "prix": 20
 }
 
-### 200 - Faire évoluer seulement le statut, pas le prix (optionnel), l'ancien est conservé
+### 200 - Changement de statut seul (le prix est conservé)
 PATCH http://localhost:3000/api/objets/7/statut
 Content-Type: application/json
 
@@ -70,7 +71,7 @@ Content-Type: application/json
 
 {}
 
-### 400 - Statut invalide (n'appartient pas à l'enum statut_objet)
+### 400 - Statut invalide (hors enum statut_objet)
 PATCH http://localhost:3000/api/objets/7/statut
 Content-Type: application/json
 
@@ -86,14 +87,31 @@ Content-Type: application/json
   "statut": "en_rayon",
   "prix": 15
 }
+<<<<<<< HEAD
  
 ### PAGE 5 DEPOTS LISTE AFFICHER
+=======
+
+# ---------------------------------------------
+#   GET /api/depots
+# ---------------------------------------------
+
+### 200 - Liste des dépôts
+>>>>>>> 34651c6e7f8cffb4c590b346947b8162384e4412
 GET http://localhost:3000/api/depots
 
-### PAGE 6 DEPOTS CARTE AFFICHER
+# ---------------------------------------------
+#   GET /api/depots/:id
+# ---------------------------------------------
+
+### 200 - Fiche d'un dépôt avec ses objets
 GET http://localhost:3000/api/depots/6
 
-### BONUS PAGE 5 AJOUTER UN DONNATEUR 
+# ---------------------------------------------
+#   POST /api/personnes
+# ---------------------------------------------
+
+### 201 - Création d'une personne (ajout d'une donatrice)
 POST http://localhost:3000/api/personnes
 Content-Type: application/json
 
@@ -104,7 +122,11 @@ Content-Type: application/json
   "adherente": true
 }
 
-### PAGE 5 AJOUTER UN DEPOT
+# ---------------------------------------------
+#   POST /api/depots
+# ---------------------------------------------
+
+### 201 - Création d'un dépôt
 POST http://localhost:3000/api/depots
 Content-Type: application/json
 
@@ -114,8 +136,11 @@ Content-Type: application/json
   "date_depot": "2026-10-15"
 }
 
+# ---------------------------------------------
+#   POST /api/depots/:id/objets
+# ---------------------------------------------
 
-### PAGE 5 et 6 AJOUTER UN OBJET 
+### 201 - Ajout d'un objet à un dépôt
 POST http://localhost:3000/api/depots/5/objets
 Content-Type: application/json
 
@@ -125,6 +150,3 @@ Content-Type: application/json
   "etat_arrivee": "bon_etat",
   "categorie_id": 2
 }
-
-
-

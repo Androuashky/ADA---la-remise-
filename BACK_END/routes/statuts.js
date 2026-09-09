@@ -3,6 +3,11 @@ import pool from '../db.js';
 
 const statutsRouter = Router();
 
+// --------------------------------------------------
+// GET
+// --------------------------------------------------
+
+// Liste des statuts disponibles (issus de l'enum statut_objet)
 statutsRouter.get("/", async (req, res, next) => {
     try {
         const result = await pool.query(`

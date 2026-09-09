@@ -3,9 +3,11 @@ import pool from '../db.js';
 
 const depotsRouter = Router();
 
+// --------------------------------------------------
+// GET
+// --------------------------------------------------
 
-
-// PAGE 5 DEPOTS LISTE AFFICHER 
+// Liste des dépôts avec le nombre d'objets et le nom de la donatrice
 depotsRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(`
@@ -23,7 +25,7 @@ depotsRouter.get("/", async (req, res) => {
     }
 });
 
-// PAGE 6 DEPOTS CARTES 
+// Fiche d'un dépôt avec ses objets
 depotsRouter.get("/:id", async (req, res, next) => {
     try {
         const result = await pool.query(`
@@ -45,7 +47,7 @@ depotsRouter.get("/:id", async (req, res, next) => {
             return res.status(404).json({ error: "Dépôt non trouvé" });
         }
 
-        res.json(result.rows); // besoin de préciser qu'on veut seulement result.rows[0] ?
+        res.json(result.rows); // À corriger : renvoyer un objet (rows[0]) au lieu d'un tableau
 
         } catch (err) {
             next(err);
@@ -53,7 +55,11 @@ depotsRouter.get("/:id", async (req, res, next) => {
 });
 
 
-// PAGE 5 FORMULAIRE DEPOT
+// --------------------------------------------------
+// POST
+// --------------------------------------------------
+
+// Création d'un dépôt (personne, date, type)
 depotsRouter.post("/", async (req, res, next) => {
     const { personne_id, date_depot, type } = req.body;
 
@@ -75,7 +81,7 @@ depotsRouter.post("/", async (req, res, next) => {
     }
 });
 
-// PAGE 5 ET 6 AJOUT D'UN OBJET
+// Ajout d'un objet à un dépôt
 depotsRouter.post("/:id/objets", async (req, res, next) => {
     const { libelle, poids_kg, etat_arrivee, categorie_id } = req.body;
     const depot_id = req.params.id;
