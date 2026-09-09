@@ -87,17 +87,8 @@ Content-Type: application/json
   "statut": "en_rayon",
   "prix": 15
 }
-<<<<<<< HEAD
  
 ### PAGE 5 DEPOTS LISTE AFFICHER
-=======
-
-# ---------------------------------------------
-#   GET /api/depots
-# ---------------------------------------------
-
-### 200 - Liste des dépôts
->>>>>>> 34651c6e7f8cffb4c590b346947b8162384e4412
 GET http://localhost:3000/api/depots
 
 # ---------------------------------------------
