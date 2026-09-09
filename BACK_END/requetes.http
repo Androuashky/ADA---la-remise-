@@ -145,3 +145,10 @@ Content-Type: application/json
   "etat_arrivee": "bon_etat",
   "categorie_id": 2
 }
+
+# ---------------------------------------------
+#   GET /api/benevoles
+# ---------------------------------------------
+
+### 200 - Liste des bénévoles (pour l'écran « Qui es-tu ? »)
+GET http://localhost:3000/api/benevoles
