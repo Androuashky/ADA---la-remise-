@@ -3,25 +3,6 @@ import pool from '../db.js';
 
 const objetsRouter = Router();
 
-// --------------------------------------------------
-// GET
-// --------------------------------------------------
-
-// La liste des objets, avec le libellé de leur catégorie
-// objetsRouter.get("/", async (req, res) => {
-//     try {
-//         const result = await pool.query(`
-//           SELECT
-//           objet.*, categorie.libelle
-//           FROM objet
-//           JOIN categorie ON objet.categorie_id = categorie.id
-//           `);
-//         res.json(result.rows)
-//           } catch (err) {
-//         console.error("Erreur GET api/objets : ", err.message)
-//         res.status(500).json({ error: err.message })
-//     }
-// });
 
 // La même liste, filtrée — les deux filtres sont optionnels et cumulables
 objetsRouter.get("/", async (req, res, next) => {
