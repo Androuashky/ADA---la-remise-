@@ -28,6 +28,5 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({ error: err.message || "Erreur interne du serveur" });
 });
 
-app.listen(3000, () => {
-  console.log(`🚀 Serveur express démarré sur http://localhost:3000`);
-});
+app.listen(process.env.PORT);
+
