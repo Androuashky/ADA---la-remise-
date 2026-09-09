@@ -87,7 +87,7 @@ Content-Type: application/json
   "prix": 15
 }
  
-## PAGE 5 DEPOTS LISTE AFFICHER
+### PAGE 5 DEPOTS LISTE AFFICHER
 GET http://localhost:3000/api/depots
 
 ### PAGE 6 DEPOTS CARTE AFFICHER
