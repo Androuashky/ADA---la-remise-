@@ -1,3 +1,5 @@
+// Les points d'entrée d'API
+
 import { Router } from 'express';
 import pool from '../db.js';
 

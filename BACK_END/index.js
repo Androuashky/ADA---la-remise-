@@ -1,3 +1,6 @@
+// Le chef d'orchestre du backend
+// 
+
 import express from "express";
 import cors from "cors";
 import objetsRouter from './routes/objets.js';

@@ -1,3 +1,6 @@
+// La passerelle vers la base de données
+//
+
 import pg from 'pg';
 import dotenv from 'dotenv';
 
