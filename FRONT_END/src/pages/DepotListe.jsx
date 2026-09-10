@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import {useNavigate} from "react-router"
 import './DepotListe.css'
 
 function DepotsListe() {
-
+    const navigate = useNavigate()
     const [depots, setDepots] = useState([])
     
     useEffect(()=> {
@@ -58,7 +59,8 @@ function DepotsListe() {
                         </td>
 
                         <td>
-                            <button className="btn-fiche">
+                            <button className="btn-fiche"
+                            onClick={() => navigate(`/depots/${depot.id}`)}>
                                 👁 Voir la fiche
                             </button>
                         </td>

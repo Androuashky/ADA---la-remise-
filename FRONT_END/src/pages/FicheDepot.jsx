@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 import './FicheDepot.css'
 
 
 function FicheDepot() {
-
+    const { id } = useParams();
     const [depotcarte, setDepotCarte] = useState([])
     
     useEffect(()=> {
 
         async function ChargerCarte () {
-            const reponse = await fetch('http://localhost:3000/api/depots/6')
+            const reponse = await fetch(`http://localhost:3000/api/depots/${id}`)
             const donnees = await reponse.json()
             setDepotCarte(donnees)
         }
         ChargerCarte()
-    }, [])
+    }, [id])
 
     return (
         <div className="table-container">
@@ -39,7 +40,7 @@ function FicheDepot() {
                     <tr key={depot.id}>
 
                         <td>
-                            #DEP-{String(depot.id).padStart(3, '0')}
+                            Fiche du dépôt {id}
                         </td>
 
                         <td>
