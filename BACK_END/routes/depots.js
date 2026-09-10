@@ -1,3 +1,6 @@
+// Les points d'entrée d'API
+// 
+
 import { Router } from 'express';
 import pool from '../db.js';
 
@@ -13,8 +16,8 @@ depotsRouter.get("/", async (req, res) => {
         const result = await pool.query(`
             SELECT depot.id, TO_CHAR(depot.date_depot, 'DD/MM/YYYY') AS date_depot , depot.type, count(objet.id), personne.nom, personne.prenom
             FROM depot
-            JOIN objet ON objet.depot_id = depot.id
             JOIN personne ON depot.personne_id = personne.id
+            LEFT JOIN objet ON objet.depot_id = depot.id
             GROUP BY depot.id, personne.nom, personne.prenom
             ORDER BY depot.id;
         `);
@@ -36,11 +39,11 @@ depotsRouter.get("/:id", async (req, res, next) => {
             depot.personne_id,
             personne.nom AS personne_nom,
             personne.prenom AS personne_prenom,
-            json_agg(objet.libelle) AS liste_objet,
-            json_agg(objet.prix) AS liste_objet_prix
+            COALESCE(json_agg(objet.libelle) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet,
+            COALESCE(json_agg(objet.prix) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet_prix
             FROM depot
             JOIN personne ON depot.personne_id = personne.id
-            JOIN objet ON objet.depot_id = depot.id
+            LEFT JOIN objet ON objet.depot_id = depot.id
             WHERE depot.id = $1
             GROUP BY depot.id, personne.id;
           `, [req.params.id]
