@@ -14,7 +14,7 @@ const depotsRouter = Router();
 depotsRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT depot.id, depot.date_depot, depot.type, count(objet.id)::int AS nombre_objets, personne.nom, personne.prenom
+            SELECT depot.id, TO_CHAR(depot.date_depot, 'DD/MM/YYYY') AS date_depot , depot.type, count(objet.id), personne.nom, personne.prenom
             FROM depot
             JOIN personne ON depot.personne_id = personne.id
             LEFT JOIN objet ON objet.depot_id = depot.id
@@ -33,7 +33,10 @@ depotsRouter.get("/:id", async (req, res, next) => {
     try {
         const result = await pool.query(`
             SELECT
-            depot.*,
+            depot.id,
+            TO_CHAR(depot.date_depot, 'DD/MM/YYYY') AS date_depot,
+            depot.type,
+            depot.personne_id,
             personne.nom AS personne_nom,
             personne.prenom AS personne_prenom,
             COALESCE(json_agg(objet.libelle) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet,

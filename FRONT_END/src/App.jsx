@@ -1,3 +1,17 @@
+import DepotsCarte from "./DepotsCarte";
+import DepotsListe from "./DepotsListe";
+
+function App() {
+
+    return(
+        <>
+        <DepotsListe/>
+        <DepotsCarte/>
+        </>
+    )
+}
+
+export default App
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
 import SearchBar from './components/SearchBar';
