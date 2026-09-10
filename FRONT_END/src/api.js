@@ -64,7 +64,12 @@ export const ajouterObjetAuDepot = (depotId, objet) =>
 // ---------- Personnes ----------
 export const getPersonnes = () => requete('/personnes');
 
+// ---------- Bénévoles ----------
+export const getBenevoles = () => requete('/benevoles');
+
 // ---------- Stats ----------
-export const getStats = () => requete('/stats');
+export const getStatsParStatut = () => requete('/stats/par-statut');
+export const getStatsPoidsTotal = () => requete('/stats/poids-total');
+export const getStatsEnRayon = () => requete('/stats/en-rayon');
 
 // Règle d'équipe : dès que quelqu'un ajoute une route au back, il ajoute aussi sa fonction dans api.js. C'est le contrat central
