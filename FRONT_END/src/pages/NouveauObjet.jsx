@@ -1,29 +1,48 @@
 import { useState, useEffect, use } from 'react';
 
-function FormulaireDepot(donnateur) {
-    const [type, setType] = useState('')
-    const [date_depot, setDate_depot] = useState('')
-    const [personne_id, setPersonne_id] = useState('')
+function FormulaireObjet(donnateur) {
+  
+    const [libelle, setLibelle] = useState('')
+    const [poids_kg, setPoids_kg] = useState('')
+    const [etat_arrivee, setEtat_arrivee] = useState('')
+    const [statut, setStatut] = useState('')
+    const [prix, setPrix] = useState('')
+    const [date_mise_rayon, setDate_mise_rayon] = useState('')
+    const [categorie, setCategorie] = useState('')
+    const [vente_id, setVente_id] = useState('')
+    const [prix_paye, setPrix_paye] = useState('')
 
     async function handleSubmit(e) {
         e.preventDefault()
 
-        const nouveauDepot = {
-            type,
-            date_depot,
-            personne_id: parseInt(personne_id),
+        const nouveauObjet = {
+            libelle,
+            poids_kg,
+            etat_arrivee,
+            statut,
+            prix,
+            date_mise_rayon,
+            categorie,
+            vente_id,
+            prix_paye
         }
 
-         const depotReponse = await fetch('http://localhost:3000/api/depots', {
+         const depotReponse = await fetch('http://localhost:3000/api/:id/depots', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(nouveauDepot)
+            body: JSON.stringify(nouveauObjet)
         })
 
         if (depotReponse.ok) {
-            setType('')
-            setDate_depot('')
-            setPersonne_id('')
+            setLibelle(''),
+            setPoids_kg(''),
+            setEtat_arrivee(''),
+            setStatut(''),
+            setPrix(''),
+            setDate_mise_rayon(''),
+            setCategorie(''),
+            setVente_id(''),
+            setPrix_paye('')
             } else {
             const erreur = await depotReponse.json()
             alert(erreur.erreur)
