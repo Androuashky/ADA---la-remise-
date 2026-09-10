@@ -1,4 +1,12 @@
-// src/pages/Identification.jsx — domaine C : écran « Qui es-tu ? »
+// src/pages/Identification.jsx — accueil, choix du bénévole
+
+import './Identification.css';
+
 export default function Identification() {
-  return <h1>Identification — à venir</h1>;
+  return (
+    <div>
+      <h1>Liste des bénévoles</h1>
+      Jean, Michel, Bernard...
+    </div>
+  );
 }

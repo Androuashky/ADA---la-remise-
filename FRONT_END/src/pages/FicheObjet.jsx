@@ -1,4 +1,12 @@
-// src/pages/FicheObjet.jsx — domaine C : écran « Fiche d'un objet »
+// src/pages/FicheObjet.jsx — fiche d'un objet
+
+import './FicheObjet.css';
+
 export default function FicheObjet() {
-  return <h1>Fiche d'un objet — à venir</h1>;
+  return (
+    <div>
+      <h1>Fiche d'un objet</h1>
+      Détails
+    </div>
+  );
 }

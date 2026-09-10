@@ -23,3 +23,17 @@
 //     }
    
 // }
+
+// src/pages/NouveauDepot.jsx — formulaire de dépôt
+
+import './NouveauDepot.css';
+
+export default function NouveauDepot() {
+  return (
+    <div>
+      <h1>Nouveau dépôt</h1>
+      Formulaire
+    </div>
+  );
+}
+
