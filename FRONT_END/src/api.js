@@ -5,22 +5,18 @@ const BASE_URL = 'http://localhost:3000/api';
 
 // Fonction générique : un fetch + gestion d'erreur unique
 async function requete(url, options = {}) {
-  try {
-    const reponse = await fetch(`${BASE_URL}${url}`, {
-      headers: { 'Content-Type': 'application/json' },
-      ...options,
-    });
+  const response = await fetch(`${BASE_URL}${url}`, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+  });
 
-    const donnees = await reponse.json();
+  const donnees = await response.json();
 
-    if (!reponse.ok) {
-      throw new Error(donnees.error || `Erreur ${reponse.status}`);
-    }
-
-    return donnees;
-  } catch (erreur) {
-    throw new Error(erreur.message);
+  if (!response.ok) {
+    throw new Error(donnees.error || `Erreur ${response.status}`);
   }
+
+  return donnees;
 }
 
 // Les fonctions dédiées (une par route du back)
