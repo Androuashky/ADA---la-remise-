@@ -1,0 +1,141 @@
+/* =========================
+   FORMULAIRE OBJET
+========================= */
+
+.formulaire-objet {
+    width: 100%;
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 30px;
+
+    background-color: white;
+
+    border: 1px solid #e1e4e8;
+    border-radius: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   CHAMPS
+========================= */
+
+.champ-objet {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dde3;
+    border-radius: 6px;
+
+    background-color: white;
+
+    color: #333;
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+/* Placeholder */
+
+.champ-objet::placeholder {
+    color: #a5adb8;
+}
+
+
+/* Quand on clique dans un champ */
+
+.champ-objet:focus {
+    border-color: #5556d9;
+
+    box-shadow: 0 0 0 3px rgba(85, 86, 217, 0.1);
+}
+
+
+/* Select */
+
+.champ-objet select {
+    cursor: pointer;
+}
+
+
+/* =========================
+   BOUTON
+========================= */
+
+.btn-ajouter-objet {
+    grid-column: 1 / -1;
+
+    justify-self: end;
+
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #4f46c7;
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+
+.btn-ajouter-objet:hover {
+    background-color: #4338a8;
+}
+
+
+.btn-ajouter-objet:active {
+    transform: scale(0.98);
+}
+
+.date-mise-rayon {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.date-mise-rayon label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #697586;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    .formulaire-objet {
+        width: calc(100% - 30px);
+
+        padding: 20px;
+
+        grid-template-columns: 1fr;
+    }
+
+    .btn-ajouter-objet {
+        width: 100%;
+    }
+}

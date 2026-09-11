@@ -1,5 +1,6 @@
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
+import { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import Identification from './pages/Identification';
 import ListeObjets from './pages/ListeObjets';
@@ -7,10 +8,14 @@ import FicheObjet from './pages/FicheObjet';
 import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
 import TableauDeBord from './pages/TableauDeBord';
+import FormulaireDepot from './pages/NouveauDepot';
 import styles from './App.module.css';
+import FormulaireObjet from './pages/NouveauObjet';
+import BoutonNvDepot from './components/BoutonNvDepot';
 
 export default function App() {
   const [donnateur, setDonnateur] =  useState([])
+  const [categorie, setCategorie] =  useState([])
 
   return (
     <div className={styles.page}>
@@ -29,6 +34,7 @@ export default function App() {
       <div className={styles.body}>
         <header className={styles.topbar}>
           <SearchBar />
+          <BoutonNvDepot/>
         </header>
         <main className={styles.content}>
           <Routes>
@@ -37,7 +43,9 @@ export default function App() {
             <Route path="/objets" element={<ListeObjets />} />
             <Route path="/objets/:id" element={<FicheObjet />} />
             <Route path="/depots" element={<DepotListe />} />
-            <Route path="/depots/:id" element={<FicheDepot />} />
+            <Route path="/depots/:id" element={<FicheDepot categorie={categorie} setCategorie={setCategorie}/>} />
+            <Route path="/nvdepots" element={<FormulaireDepot donnateur={donnateur} setDonnateur={setDonnateur}/>} />
+            <Route path="/depots/:id/nvobjet" element={<FormulaireObjet categorie={categorie} setCategorie={setCategorie} />} />
           </Routes>
         </main>
       </div>

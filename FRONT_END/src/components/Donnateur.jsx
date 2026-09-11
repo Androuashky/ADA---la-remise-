@@ -1,6 +1,6 @@
- import { useState, useEffect } from 'react'
+ import { useEffect } from 'react'
 
-function Donnateur ({donnateur, setDonnateur}) {
+function Donnateur ({setDonnateur}) {
 
   useEffect(() => {
     async function chargerDonnateur() {
@@ -10,6 +10,7 @@ function Donnateur ({donnateur, setDonnateur}) {
     }
     chargerDonnateur()
   }, [setDonnateur])
-  }
+  return null
+}
 
 export default Donnateur

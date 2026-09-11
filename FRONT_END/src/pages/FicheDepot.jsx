@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import './FicheDepot.css'
+import FormulaireObjet from './NouveauObjet';
+import { useNavigate } from 'react-router';
 
 
-function FicheDepot() {
+
+function FicheDepot({ categorie, setCategorie }) {
     const { id } = useParams();
     const [depotcarte, setDepotCarte] = useState([])
+    const [afficherFormulaire, setAfficherFormulaire] = useState(false)
     
     useEffect(()=> {
 
@@ -78,6 +82,25 @@ function FicheDepot() {
             </tbody>
 
         </table>
+
+        {!afficherFormulaire && (
+            <button className="btn-ajouter-objet" onClick={() => setAfficherFormulaire(true)}>
+                Ajouter un objet
+            </button>
+        )}
+
+        {afficherFormulaire && (
+            <>
+                <button className="btn-annuler-objet" onClick={() => setAfficherFormulaire(false)}>
+                    Annuler
+                </button>
+
+                <FormulaireObjet
+                    categorie={categorie}
+                    setCategorie={setCategorie}
+                />
+            </>
+        )}
 
     </div>
     )
