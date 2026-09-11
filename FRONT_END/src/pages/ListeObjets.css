@@ -1,0 +1,92 @@
+.main-container h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.main-container p {
+    color: #64748B;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+
+.table-container {
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.select-th {
+  font-size: 13px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+thead th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tfoot td {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+  padding: 18px 16px;
+  background-color: #fafafa;
+  border-top: 1px solid #e5e7eb;
+}
+
+tbody td {
+  font-size: 14px;
+  padding: 16px 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+/* Supprime la bordure sous le dernier élément pour ne pas doubler avec le bas du wrapper */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.btn-fiche-objet {
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #aaaaaa;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.btn-fiche-objet:link {
+  text-decoration: none;
+}
+
+
+.btn-fiche-objet:hover {
+    color: #4F46E5;
+    border: 1px solid #4F46E5;
+    background-color: #eeeeee;
+    opacity: 0.85;
+}
