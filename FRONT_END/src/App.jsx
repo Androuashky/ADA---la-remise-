@@ -6,6 +6,7 @@ import ListeObjets from './pages/ListeObjets';
 import FicheObjet from './pages/FicheObjet';
 import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
+import NouveauDepot from './pages/NouveauDepot';
 import TableauDeBord from './pages/TableauDeBord';
 import './App.css';
 
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="/objets" element={<ListeObjets />} />
             <Route path="/objets/:id" element={<FicheObjet />} />
             <Route path="/depots" element={<DepotListe />} />
+            <Route path="/depots/nouveaudepot" element={<NouveauDepot />} />
             <Route path="/depots/:id" element={<FicheDepot />} />
           </Routes>
         </main>
