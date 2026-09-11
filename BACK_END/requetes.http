@@ -22,7 +22,7 @@ GET http://localhost:3000/api/objets?statut=toto&categorie_id=2
 GET http://localhost:3000/api/objets?statut=recycle&categorie_id=abc
 
 ### 200 - L'objet existe
-GET http://localhost:3000/api/objets/2
+GET http://localhost:3000/api/objets/26
 
 ### 404 - L'objet n'existe pas
 GET http://localhost:3000/api/objets/777
