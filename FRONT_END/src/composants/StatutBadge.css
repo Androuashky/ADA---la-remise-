@@ -1,0 +1,36 @@
+/* Style de base du badge */
+.statut-badge {
+  padding: 8px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  /* border: 1px solid; */
+}
+
+/* Couleurs par statut */
+.statut-badge.recycle {
+  background-color: #e6f4ea;
+  color: #137333;
+}
+
+.statut-badge.en_reparation {
+  background-color: #fef7e0;
+  color: #b06000;
+}
+
+.statut-badge.vendu {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+}
+
+.statut-badge.arrive {
+  background-color: #fce8e6;
+  color: #c5221f;
+}
+
+.statut-badge.en_rayon {
+  background-color: #f1f3f4;
+  color: #5f6368;
+}
