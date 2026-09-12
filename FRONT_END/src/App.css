@@ -108,3 +108,92 @@ p.gestion-section {
   padding: 50px;
   background-color: #F8F9FA;
 }
+
+/* ---- Styles partagés entre les pages ---- */
+
+.main-container {
+  /* conteneur de page réutilisé par ListeObjets, FicheObjet, etc. */
+}
+
+.table-container {
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+  overflow-x: auto;
+  background-color: white;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+/* Bouton de base (liens stylés en boutons) */
+.btn {
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  color: #aaaaaa;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+  text-decoration: none;
+}
+
+.btn:link { text-decoration: none; }
+
+.btn:hover {
+  color: #4F46E5;
+  border-color: #4F46E5;
+  background-color: #eeeeee;
+  opacity: 0.85;
+}
+
+/* Tableau global */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+thead th {
+  color: #64748B;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 18px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #fafafa;
+}
+
+tbody td {
+  font-size: 14px;
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+tbody tr:hover { background-color: #f9fafb; }
+
+tfoot td {
+  color: #64748B;
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+  padding: 18px 16px;
+  background-color: #fafafa;
+  border-top: 1px solid #e5e7eb;
+}

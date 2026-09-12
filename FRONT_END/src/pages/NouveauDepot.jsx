@@ -1,25 +1,54 @@
-// import { useState, useEffect, use } from 'react';
+// src/pages/NouveauDepot.jsx — formulaire de création d'un dépôt
+import { useState } from 'react';
 
-// function FormulaireDepot() {
-//     const [type, setType] = useState('')
-//     const [personne_id, setPersonne_id] = useState('')
-//     const [libelle, setLibelle] = useState('')
-//     const [poids_kg, setPoids_kg] = useState('')
-//     const [etat_arrivee, setEtat_arrivee] = useState('')
-//     const [statut, setStatut] = useState('')
-//     const [prix, setPrix] = useState('')
-//     const [date_mise_rayon, setDate_mise_rayon] = useState('')
-//     const [categorie, setCategorie] = useState('')
-//     const [vente_id, setVente_id] = useState('')
-//     const [prix_paye, setPrix_paye] = useState('')
+export default function NouveauDepot() {
+  const [type, setType] = useState('boutique');
+  const [personne_id, setPersonneId] = useState('');
+  const [message, setMessage] = useState(null);
 
-//     async function handleSubmit(e) {
-//         e.preventDefault()
+  async function enregistrer(e) {
+    e.preventDefault();
+    try {
+      const reponse = await fetch('http://localhost:3000/api/depots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ personne_id, type }),
+      });
+      const donnees = await reponse.json();
+      if (!reponse.ok) throw new Error(donnees.error);
+      setMessage(`Dépôt n°${donnees.id} enregistré ✅`);
+      setPersonneId('');
+    } catch (err) {
+      setMessage(`Erreur : ${err.message}`);
+    }
+  }
 
-//         const nouveauDepot = {
-//             type,
+  return (
+    <div>
+      <h1>Nouveau dépôt</h1>
+      {message && <p>{message}</p>}
+      <form onSubmit={enregistrer}>
+        <label>
+          Donatrice
+          <input
+            type="number"
+            value={personne_id}
+            onChange={(e) => setPersonneId(e.target.value)}
+            placeholder="ID de la personne"
+            required
+          />
+        </label>
 
-//         }
-//     }
-   
-// }
+        <label>
+          Type
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="boutique">En boutique</option>
+            <option value="domicile">À domicile</option>
+          </select>
+        </label>
+
+        <button type="submit">Enregistrer le dépôt</button>
+      </form>
+    </div>
+  );
+}

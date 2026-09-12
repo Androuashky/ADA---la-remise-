@@ -53,7 +53,7 @@ export default function ListeObjets() {
 
   return (
     <div className="main-container">
-      <h2>Liste des objets</h2>
+      <h2 className="page-title">Liste des objets</h2>
       <p>Gérez et suivez le statut de tous les objets enregistrés dans la Remise.</p>
 
       {/* Conteneur du tableau */}
@@ -110,7 +110,7 @@ export default function ListeObjets() {
                   <td>{objet.categorie_libelle}</td>
                   <td><StatutBadge statut={objet.statut} /></td>
                   <td>
-                    <Link to={`/objets/${objet.id}`} className="btn-fiche-objet">Voir la fiche</Link>
+                    <Link to={`/objets/${objet.id}`} className="btn">Voir la fiche</Link>
                   </td>
                 </tr>
               ))

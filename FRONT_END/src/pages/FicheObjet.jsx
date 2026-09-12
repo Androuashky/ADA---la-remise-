@@ -38,7 +38,7 @@ export default function FicheObjet() {
 
         <div className="fiche-header">
           <div className="header-title-row">
-            <h1>{objet.libelle}</h1>
+            <h1 className="page-title">{objet.libelle}</h1>
             <StatutBadge statut={objet.statut} />
           </div>
           <p className="header-subtitle">

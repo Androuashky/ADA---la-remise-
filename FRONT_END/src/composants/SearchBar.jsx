@@ -1,22 +1,17 @@
-// src/components/SearchBar.jsx
-import { useState } from 'react';
 import './SearchBar.css';
 
-export default function SearchBar() {
-  const [recherche, setRecherche] = useState('');
-
+export default function SearchBar({ value, onChange }) {
   const soumettre = (e) => {
-    e.preventDefault();
-    // Câblé plus tard : la page fera GET /api/objets?recherche=...
+    e.preventDefault(); // Évite le rechargement de la page au Submit
   };
 
   return (
     <form role="search" onSubmit={soumettre} className="form">
       <input
         type="search"
-        value={recherche}
-        onChange={(e) => setRecherche(e.target.value)}
-        placeholder="Rechercher un objet…"
+        value={value}
+        onChange={onChange}
+        placeholder="🔎 Rechercher un objet, une catégorie..."
         className="input"
       />
     </form>
