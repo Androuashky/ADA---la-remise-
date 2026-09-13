@@ -10,6 +10,11 @@ function FormulaireDepot({donnateur,setDonnateur}) {
     const [personne_id, setPersonne_id] = useState('')
     const navigate = useNavigate()
 
+    const donateurSelectionne = donnateur.find(
+        d => d.id === parseInt(personne_id)
+    );
+
+
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -44,28 +49,149 @@ function FormulaireDepot({donnateur,setDonnateur}) {
     <form className="formulaire-depot" onSubmit={handleSubmit}>
       <Donnateur setDonnateur={setDonnateur} />
 
-      <input
-        className="date-depot"
-        type="date"
-        placeholder="date du dépot"
-        value={date_depot}
-        onChange={(e) => setDate_depot(e.target.value)}
-      />
 
-      <select className="type-depot" value={type} onChange={(e) => setType(e.target.value)}>
-        <option value="">Type...</option>
-        <option value="boutique">Boutique</option>
-        <option value="domicile">Domicile</option>
-      </select>
+      <div
+        className="retour-depots"
+        onClick={() => navigate('/depots')}
+        >
+          ← Retour à la liste des dépôts
+      </div>
 
-      <select className="personne-depot" value={personne_id} onChange={(e) => setPersonne_id(e.target.value)}>
-        <option value="">Donnateur...</option>
-        {donnateur.map(d => (
-          <option key={d.id} value={d.id}>{d.nom} - {d.prenom} - {d.telephone}</option>
-        ))}
-      </select>
+      {/* TITRE */}
+      <h1>Enregistrer un dépôt</h1>
 
-      <button className="btn-ajouter-depot" type="submit">Ajouter le dépot</button>
+        <p className="description-depot">
+                Saisissez les détails du lot apporté.
+        </p>
+
+      {/* INFORMATIONS GÉNÉRALES */}
+        <section className="bloc-informations">
+
+          <h2>Informations générales</h2>
+
+          <div className="ligne-separation"></div>
+
+            <div className="grille-informations">
+
+
+                    {/* DONATEUR */}
+                    <div className="champ-depot">
+
+                        <label>DONATEUR</label>
+
+                        <select
+                            value={personne_id}
+                            onChange={(e) =>
+                                setPersonne_id(e.target.value)
+                            }
+                        >
+
+                            <option value="">
+                                Sélectionner un donateur
+                            </option>
+
+                            {donnateur.map(d => (
+                                <option
+                                    key={d.id}
+                                    value={d.id}
+                                >
+                                    {d.prenom} {d.nom}
+                                </option>
+                            ))}
+
+                        </select>
+
+                    </div>
+
+
+                    {/* TELEPHONE */}
+                    <div className="champ-depot">
+
+                        <label>TÉLÉPHONE DU DONATEUR</label>
+
+                        <input
+                            type="text"
+                            value={
+                                donateurSelectionne
+                                    ? donateurSelectionne.telephone
+                                    : ''
+                            }
+                            placeholder="Sélectionnez un donateur"
+                            readOnly
+                        />
+
+                    </div>
+
+
+                    {/* DATE */}
+                    <div className="champ-depot">
+
+                        <label>DATE DU DÉPÔT</label>
+
+                        <input
+                            type="date"
+                            value={date_depot}
+                            onChange={(e) =>
+                                setDate_depot(e.target.value)
+                            }
+                        />
+
+                    </div>
+
+
+                    {/* TYPE */}
+                    <div className="champ-depot">
+
+                        <label>TYPE DE DÉPÔT</label>
+
+                        <select
+                            value={type}
+                            onChange={(e) =>
+                                setType(e.target.value)
+                            }
+                        >
+
+                            <option value="">
+                                Sélectionner
+                            </option>
+
+                            <option value="boutique">
+                                Boutique
+                            </option>
+
+                            <option value="domicile">
+                                Domicile
+                            </option>
+
+                        </select>
+
+                    </div>
+
+            </div>
+
+      </section>
+
+
+            {/* BOUTONS */}
+            <div className="actions-depot">
+
+                <button
+                    type="button"
+                    className="btn-annuler"
+                    onClick={() => navigate('/depots')}
+                >
+                    Annuler
+                </button>
+
+                <button
+                    type="submit"
+                    className="btn-enregistrer"
+                >
+                    Enregistrer le dépôt
+                </button>
+
+            </div>
+
     </form>
     )  
 }

@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import Categorie from '../components/Categorie';
 import './NouveauObjet.css'
 
-function FormulaireObjet({categorie, setCategorie}) {
+function FormulaireObjet({categorie, setCategorie, onAjouteObjet}) {
   
     const [libelle, setLibelle] = useState('')
     const [poids_kg, setPoids_kg] = useState('')
@@ -11,9 +11,8 @@ function FormulaireObjet({categorie, setCategorie}) {
     const [statut, setStatut] = useState('')
     const [prix, setPrix] = useState('')
     const [date_mise_rayon, setDate_mise_rayon] = useState('')
-    const [catego, setCatego] = useState('')
-    const [vente_id, setVente_id] = useState('')
-    const [prix_paye, setPrix_paye] = useState('')
+    const [categorie_id, setCategorie_id] = useState('')
+
 
     const {id} = useParams()
 
@@ -22,14 +21,13 @@ function FormulaireObjet({categorie, setCategorie}) {
 
         const nouveauObjet = {
             libelle,
-            poids_kg,
+            poids_kg: parseFloat(poids_kg.replace(',', '.')),
             etat_arrivee,
             statut,
-            prix,
-            date_mise_rayon,
-            categorie,
-            vente_id,
-            prix_paye
+            prix: parseFloat(prix.replace(',', '.')),
+            date_mise_rayon: date_mise_rayon || undefined,
+            categorie_id: parseInt(categorie_id),
+            depot_id: parseInt(id)
         }
 
          const objetReponse = await fetch(`http://localhost:3000/api/depots/${id}/objets`, {
@@ -45,115 +43,243 @@ function FormulaireObjet({categorie, setCategorie}) {
             setStatut(''),
             setPrix(''),
             setDate_mise_rayon(''),
-            setCategorie(''),
-            setVente_id(''),
-            setPrix_paye('')
+            setCategorie_id('')
+
+            onAjouteObjet()
             } else {
             const erreur = await objetReponse.json()
             alert(erreur.erreur)
+
+    
         }
     }
 
+        function gererNombre(e, setter) {
+        let valeur = e.target.value;
+
+        // Autorise uniquement les chiffres et la virgule
+        valeur = valeur.replace(/[^0-9,]/g, '');
+
+        // Une seule virgule
+        const parties = valeur.split(',');
+
+        if (parties.length > 2) {
+            valeur = parties[0] + ',' + parties.slice(1).join('');
+        }
+
+        const nouvellesParties = valeur.split(',');
+
+        // Maximum 2 chiffres après la virgule
+        if (nouvellesParties[1]) {
+            nouvellesParties[1] =
+                nouvellesParties[1].slice(0, 2);
+        }
+
+        setter(nouvellesParties.join(','));
+    }
+
     return (
-    <form className="formulaire-objet" onSubmit={handleSubmit}>
-      <Categorie setCategorie={setCategorie}/>
+     <form
+            className="formulaire-objet"
+            onSubmit={handleSubmit}
+        >
+            <Categorie setCategorie={setCategorie}/>
+            <div className="ligne-formulaire">
 
-      <input
-        className="champ-objet"
-        type="text"
-        placeholder="nom de l'objet"
-        value={libelle}
-        onChange={(e) => setLibelle(e.target.value)}
-      />
+                {/* DÉSIGNATION */}
+                <div className="groupe-champ groupe-libelle">
+                    <label>DÉSIGNATION DE L'OBJET</label>
 
-       <input
-          className="champ-objet"
-          type="text"
-          inputMode="decimal"
-          placeholder="poids en kg"
-          value={poids_kg}
-          onChange={(e) => {
-              let valeur = e.target.value
+                    <input
+                        className="champ-objet"
+                        type="text"
+                        placeholder="Ex : Chaise en bois"
+                        value={libelle}
+                        onChange={(e) =>
+                            setLibelle(e.target.value)
+                        }
+                        required
+                    />
+                </div>
 
-              // Supprime tout sauf les chiffres et la virgule
-              valeur = valeur.replace(/[^0-9,]/g, '')
 
-              // Une seule virgule
-              const parties = valeur.split(',')
+                {/* CATÉGORIE */}
+                <div className="groupe-champ">
+                    <label>CATÉGORIE</label>
 
-              // Maximum 2 chiffres après la virgule
-              if (parties[1]) {
-                  parties[1] = parties[1].slice(0, 2)
-              }
+                    <select
+                        className="champ-objet"
+                        value={categorie_id}
+                        onChange={(e) =>
+                            setCategorie_id(e.target.value)
+                        }
+                        required
+                    >
+                        <option value="">
+                            Sélectionner
+                        </option>
 
-              valeur = parties.join(',')
+                        {categorie.map((c) => (
+                            <option
+                                key={c.id}
+                                value={c.id}
+                            >
+                                {c.libelle}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-              setPoids_kg(valeur)
-          }}
-      />
 
-      <select className="champ-objet" value={etat_arrivee} onChange={(e) => setEtat_arrivee(e.target.value)}>
-        <option value="">Etat arrivée</option>
-        <option value="bon_etat">Bon état</option>
-        <option value="a_reparer">A réparer</option>
-        <option value="hors_service">Hors service</option>
-      </select>
+                {/* POIDS */}
+                <div className="groupe-champ">
+                    <label>POIDS (KG)</label>
 
-      <select className="champ-objet" value={statut} onChange={(e) => setStatut(e.target.value)}>
-        <option value="">Statut</option>
-        <option value="arrive">arrivé</option>
-        <option value="en_reparation">en réparation</option>
-        <option value="en_rayon">en rayon</option>
-        <option value="vendu">vendu</option>
-        <option value="recycle">recyclé</option>
-      </select>
+                    <input
+                        className="champ-objet"
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="0,00"
+                        value={poids_kg}
+                        onChange={(e) =>
+                            gererNombre(
+                                e,
+                                setPoids_kg
+                            )
+                        }
+                        required
+                    />
+                </div>
 
-      <input
-        className="champ-objet"
-        type="text"
-        inputMode="decimal"
-        placeholder="prix"
-        value={prix}
-        onChange={(e) => {
-            let valeur = e.target.value
 
-            // Supprime tout sauf les chiffres et la virgule
-            valeur = valeur.replace(/[^0-9,]/g, '')
+                {/* PRIX */}
+                <div className="groupe-champ">
+                    <label>PRIX ESTIMÉ (€)</label>
 
-            // Une seule virgule
-            const parties = valeur.split(',')
+                    <input
+                        className="champ-objet"
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="0,00"
+                        value={prix}
+                        onChange={(e) =>
+                            gererNombre(
+                                e,
+                                setPrix
+                            )
+                        }
+                        required
+                    />
+                </div>
 
-            // Maximum 2 chiffres après la virgule
-            if (parties[1]) {
-                parties[1] = parties[1].slice(0, 2)
-            }
+            </div>
 
-            valeur = parties.join(',')
 
-            setPrix(valeur)
-        }}
-    />
-      <div className="date-mise-rayon">
-          <label>Date de mise en rayon</label>
+            <div className="ligne-formulaire">
 
-          <input
-              className="champ-objet"
-              type="date"
-              placeholder="date de mise en rayon"
-              value={date_mise_rayon}
-              onChange={(e) => setDate_mise_rayon(e.target.value)}
-          />
-      </div>
+                {/* ÉTAT À L'ARRIVÉE */}
+                <div className="groupe-champ">
+                    <label>ÉTAT À L'ARRIVÉE</label>
 
-      <select className="champ-objet"  value={catego} onChange={(e) => setCatego(e.target.value)}>
-        <option value="">Catégories</option>
-        {categorie.map(c => (
-          <option key={c.id} value={c.id}>{c.libelle}</option>
-        ))}
-      </select>
+                    <select
+                        className="champ-objet"
+                        value={etat_arrivee}
+                        onChange={(e) =>
+                            setEtat_arrivee(e.target.value)
+                        }
+                        required
+                    >
+                        <option value="">
+                            Sélectionner
+                        </option>
 
-      <button className="btn-ajouter-objet" type="submit">Ajouter l'objet</button>
+                        <option value="bon_etat">
+                            Bon état
+                        </option>
+
+                        <option value="a_reparer">
+                            À réparer
+                        </option>
+
+                        <option value="hors_service">
+                            Hors service
+                        </option>
+                    </select>
+                </div>
+
+
+                {/* STATUT */}
+                <div className="groupe-champ">
+                    <label>STATUT</label>
+
+                    <select
+                        className="champ-objet"
+                        value={statut}
+                        onChange={(e) =>
+                            setStatut(e.target.value)
+                        }
+                        required
+                    >
+                        <option value="">
+                            Sélectionner
+                        </option>
+
+                        <option value="arrive">
+                            Arrivé
+                        </option>
+
+                        <option value="en_reparation">
+                            En réparation
+                        </option>
+
+                        <option value="en_rayon">
+                            En rayon
+                        </option>
+
+                        <option value="vendu">
+                            Vendu
+                        </option>
+
+                        <option value="recycle">
+                            Recyclé
+                        </option>
+                    </select>
+                </div>
+
+
+                {/* DATE */}
+                <div className="groupe-champ">
+                    <label>DATE DE MISE EN RAYON</label>
+
+                    <input
+                        className="champ-objet"
+                        type="date"
+                        value={date_mise_rayon}
+                        onChange={(e) =>
+                            setDate_mise_rayon(
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+
+            </div>
+
+
+            {/* BOUTON */}
+            <div className="actions-formulaire">
+
+                <button
+                    className="btn-valider-objet"
+                    type="submit"
+                >
+                    Ajouter l'objet
+                </button>
+
+            </div>
+
     </form>
+
     )  
 }
 

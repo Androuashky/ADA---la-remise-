@@ -16,6 +16,23 @@ function DepotsListe() {
     }, [])
 
     return (
+    <>
+     <div className="depot-liste">
+
+            {/* =========================
+                TITRE
+            ========================= */}
+
+            <div className="entete-depots">
+
+                <h1>Gestion des dépôts</h1>
+
+                <p>
+                    Suivi des dépôts apportés par les donateurs et avancement du tri.
+                </p>
+
+            </div>
+    
     <div className="table-container">
 
         <table>
@@ -73,7 +90,9 @@ function DepotsListe() {
 
         </table>
 
+        </div>
     </div>
+    </>
     )
 }
 

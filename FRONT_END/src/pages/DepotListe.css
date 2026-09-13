@@ -1,54 +1,241 @@
+/* =========================
+   CONTENEUR PRINCIPAL
+========================= */
+
+.depot-liste {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 24px 20px 60px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    color: #111827;
+}
+
+
+/* =========================
+   TITRE
+========================= */
+
+.entete-depots {
+    margin-bottom: 28px;
+}
+
+.entete-depots h1 {
+    margin: 0 0 5px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    color: #111111;
+}
+
+.entete-depots p {
+    margin: 0;
+
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.5;
+
+    color: #71829d;
+}
+
+
+/* =========================
+   TABLEAU
+========================= */
+
 .table-container {
-    background-color: white;
+    width: 100%;
+
+    background-color: #ffffff;
+
     border: 1px solid #e0e3e8;
-    border-radius: 6px;
+
+    border-radius: 5px;
+
     overflow-x: auto;
 }
 
+
+/* =========================
+   TABLE
+========================= */
+
 table {
     width: 100%;
+
     border-collapse: collapse;
+
+    table-layout: auto;
 }
 
+
+/* =========================
+   EN-TÊTE DU TABLEAU
+========================= */
+
 thead {
-    background-color: #f4f5f7;
+    background-color: #f1f2f4;
 }
 
 th {
+    padding: 10px 20px;
+
     text-align: left;
-    padding: 12px 14px;
-    color: #6f7885;
-    font-size: 8px;
-    font-weight: bold;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.02em;
+
+    color: #667085;
+
     white-space: nowrap;
+
+    border-bottom: 1px solid #e0e3e8;
 }
 
+
+/* =========================
+   CELLULES
+========================= */
+
 td {
-    padding: 14px;
-    border-top: 1px solid #edf0f2;
+    padding: 12px 20px;
+
     font-size: 10px;
+    font-weight: 400;
+
     color: #5e6773;
+
     white-space: nowrap;
+
+    vertical-align: middle;
+
+    border-bottom: 1px solid #edf0f2;
 }
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================
+   ID
+========================= */
+
+tbody td:first-child {
+    color: #4b5563;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   DONATEUR
+========================= */
 
 .donateur {
     color: #303741;
-    font-weight: bold;
+
+    font-size: 10px;
+
+    font-weight: 600;
 }
 
 
+/* =========================
+   TYPE
+========================= */
 
-/* Bouton voir la fiche */
+tbody td:nth-child(3) {
+    color: #718096;
+}
+
+
+/* =========================
+   NOMBRE D'OBJETS
+========================= */
+
+tbody td:nth-child(5) {
+    color: #718096;
+}
+
+
+/* =========================
+   SURVOL
+========================= */
+
+tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+    background-color: #fafafa;
+}
+
+
+/* =========================
+   BOUTON VOIR LA FICHE
+========================= */
 
 .btn-fiche {
+    padding: 0;
+
     border: none;
+
     background: none;
+
     color: #4b5563;
-    font-size: 9px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    font-size: 10px;
+    font-weight: 400;
+
     text-decoration: underline;
+
     cursor: pointer;
 }
 
 .btn-fiche:hover {
-    color: #5146e5;
+    color: #4f46e5;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .depot-liste {
+        padding: 20px 16px 40px;
+    }
+
+    .entete-depots h1 {
+        font-size: 20px;
+    }
+
+    .entete-depots p {
+        font-size: 11px;
+    }
+
+    .table-container {
+        border-radius: 5px;
+    }
+
+    th {
+        padding: 10px 14px;
+    }
+
+    td {
+        padding: 12px 14px;
+    }
 }
