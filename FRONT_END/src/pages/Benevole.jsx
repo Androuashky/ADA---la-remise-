@@ -72,8 +72,11 @@ function Benevole({ setBenevole }) {
 
 
                 <h1>
-                    Bienvenue sur l'application
+                    Bienvenue à la Remise
                 </h1>
+                <h2>
+                    Rien ne se perd, tout se réinvente !                    
+                </h2>
 
 
                 <p className="description">
