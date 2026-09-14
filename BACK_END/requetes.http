@@ -5,6 +5,8 @@
 # ---------------------------------------------
 #   GET /api/objets
 # ---------------------------------------------
+### 200 -Lister personne(donnateur)
+GET http://localhost:3000/api/personnes
 
 ### 200 - Liste des objets sans filtre
 GET http://localhost:3000/api/objets?statut=&categorie_id=
@@ -22,7 +24,7 @@ GET http://localhost:3000/api/objets?statut=toto&categorie_id=2
 GET http://localhost:3000/api/objets?statut=recycle&categorie_id=abc
 
 ### 200 - L'objet existe
-GET http://localhost:3000/api/objets/2
+GET http://localhost:3000/api/objets/28
 
 ### 404 - L'objet n'existe pas
 GET http://localhost:3000/api/objets/777

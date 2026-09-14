@@ -1,54 +1,98 @@
-.table-container {
-    background-color: white;
-    border: 1px solid #e0e3e8;
-    border-radius: 6px;
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-thead {
-    background-color: #f4f5f7;
-}
-
-th {
-    text-align: left;
-    padding: 12px 14px;
-    color: #6f7885;
-    font-size: 8px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-td {
-    padding: 14px;
-    border-top: 1px solid #edf0f2;
-    font-size: 10px;
-    color: #5e6773;
-    white-space: nowrap;
-}
-
+/* =========================
+   CONTENEUR PRINCIPAL
 .donateur {
     color: #303741;
-    font-weight: bold;
+
+    font-size: 10px;
+
+    font-weight: 600;
 }
 
 
+/* =========================
+   TYPE
+========================= */
 
-/* Bouton voir la fiche */
+tbody td:nth-child(3) {
+    color: #718096;
+}
 
+
+/* =========================
+   NOMBRE D'OBJETS
+========================= */
+
+tbody td:nth-child(5) {
+    color: #718096;
+}
+
+
+/* =========================
+   SURVOL
+========================= */
+
+tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+    background-color: #fafafa;
+}
+
+
+/* =========================
+   BOUTON VOIR LA FICHE
 .btn-fiche {
+    padding: 0;
+
     border: none;
+
     background: none;
+
     color: #4b5563;
-    font-size: 9px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    font-size: 10px;
+    font-weight: 400;
+
     text-decoration: underline;
+
     cursor: pointer;
 }
 
 .btn-fiche:hover {
-    color: #5146e5;
+    color: #4f46e5;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .depot-liste {
+        padding: 20px 16px 40px;
+    }
+
+    .entete-depots h1 {
+        font-size: 20px;
+    }
+
+    .entete-depots p {
+        font-size: 11px;
+    }
+
+    .table-container {
+        border-radius: 5px;
+    }
+
+    th {
+        padding: 10px 14px;
+    }
+
+    td {
+        padding: 12px 14px;
+    }
 }
