@@ -13,7 +13,7 @@ const personnesRouter = Router();
 personnesRouter.get("/", async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT personne.nom, personne.prenom, personne.telephone, personne.adherente
+            SELECT personne.id, personne.nom, personne.prenom, personne.telephone, personne.adherente
             FROM personne
             ORDER BY id ASC;
         `);

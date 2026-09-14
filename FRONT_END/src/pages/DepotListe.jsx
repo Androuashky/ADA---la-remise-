@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import {useNavigate} from "react-router"
 import './DepotListe.css'
 
 function DepotsListe() {
-
+    const navigate = useNavigate()
     const [depots, setDepots] = useState([])
     
     useEffect(()=> {
@@ -15,6 +16,23 @@ function DepotsListe() {
     }, [])
 
     return (
+    <>
+     <div className="depot-liste">
+
+            {/* =========================
+                TITRE
+            ========================= */}
+
+            <div className="entete-depots">
+
+                <h1>Gestion des dépôts</h1>
+
+                <p>
+                    Suivi des dépôts apportés par les donateurs et avancement du tri.
+                </p>
+
+            </div>
+    
     <div className="table-container">
 
         <table>
@@ -58,7 +76,8 @@ function DepotsListe() {
                         </td>
 
                         <td>
-                            <button className="btn-fiche">
+                            <button className="btn-fiche"
+                            onClick={() => navigate(`/depots/${depot.id}`)}>
                                 👁 Voir la fiche
                             </button>
                         </td>
@@ -71,7 +90,9 @@ function DepotsListe() {
 
         </table>
 
+        </div>
     </div>
+    </>
     )
 }
 

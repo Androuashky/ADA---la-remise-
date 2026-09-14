@@ -1,5 +1,7 @@
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
+import { useState } from 'react';
+import SearchBar from './components/SearchBar';
 // import SearchBar from './composants/SearchBar';
 import Identification from './pages/Identification';
 import ListeObjets from './pages/ListeObjets';
@@ -8,9 +10,16 @@ import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
 import NouveauDepot from './pages/NouveauDepot';
 import TableauDeBord from './pages/TableauDeBord';
+import FormulaireDepot from './pages/NouveauDepot';
+import styles from './App.module.css';
+import FormulaireObjet from './pages/NouveauObjet';
+import BoutonNvDepot from './components/BoutonNvDepot';
 import './App.css';
 
 export default function App() {
+  const [donnateur, setDonnateur] =  useState([])
+  const [categorie, setCategorie] =  useState([])
+
   return (
     <div className="page">
       {/* Barre latérale gauche */}
@@ -30,9 +39,10 @@ export default function App() {
       </aside>
 
       {/* Colonne de droite : searchbar + page courante */}
-      <div className="body">
+      <div className="body>
         <header className="topbar">
-          {/* <SearchBar /> */}
+          <SearchBar />
+          <BoutonNvDepot/>
         </header>
         <main className="content">
           <Routes>
@@ -41,8 +51,9 @@ export default function App() {
             <Route path="/objets" element={<ListeObjets />} />
             <Route path="/objets/:id" element={<FicheObjet />} />
             <Route path="/depots" element={<DepotListe />} />
-            <Route path="/depots/nouveaudepot" element={<NouveauDepot />} />
-            <Route path="/depots/:id" element={<FicheDepot />} />
+            <Route path="/depots/:id" element={<FicheDepot categorie={categorie} setCategorie={setCategorie}/>} />
+            <Route path="/nvdepots" element={<FormulaireDepot donnateur={donnateur} setDonnateur={setDonnateur}/>} />
+            <Route path="/depots/:id/nvobjet" element={<FormulaireObjet categorie={categorie} setCategorie={setCategorie} />} />
           </Routes>
         </main>
       </div>

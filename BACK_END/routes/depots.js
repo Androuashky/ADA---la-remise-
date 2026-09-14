@@ -19,7 +19,7 @@ depotsRouter.get("/", async (req, res) => {
             JOIN personne ON depot.personne_id = personne.id
             LEFT JOIN objet ON objet.depot_id = depot.id
             GROUP BY depot.id, personne.nom, personne.prenom
-            ORDER BY depot.id;
+            ORDER BY depot.id DESC;
         `);
         res.json(result.rows);
     } catch (err) {
@@ -39,6 +39,7 @@ depotsRouter.get("/:id", async (req, res, next) => {
             depot.personne_id,
             personne.nom AS personne_nom,
             personne.prenom AS personne_prenom,
+            personne.telephone AS personne_telephone,
             COALESCE(json_agg(objet.libelle) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet,
             COALESCE(json_agg(objet.prix) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet_prix
             FROM depot
@@ -89,24 +90,34 @@ depotsRouter.post("/", async (req, res, next) => {
 
 // Ajout d'un objet à un dépôt
 depotsRouter.post("/:id/objets", async (req, res, next) => {
-    const { libelle, poids_kg, etat_arrivee, categorie_id } = req.body;
+    const { libelle, poids_kg, etat_arrivee, statut, prix, date_mise_rayon, categorie_id } = req.body;
     const depot_id = req.params.id;
     const etats = ["bon_etat", "a_reparer", "hors_service"];
 
-    if (!libelle || !categorie_id) {
-        return res.status(400).json({ error: "Le libellé et la categorie sont obligatoires." });
-    }
 
     if (etat_arrivee && !etats.includes(etat_arrivee)) {
         return res.status(400).json({ error: `L'état d'arrivée doit être l'un des suivants : ${etats.join(', ')}` });
     }
 
+    const champsManquants = [];
+    if (!libelle) champsManquants.push('libelle');
+    if (!categorie_id) champsManquants.push('categorie_id');
+    if (!poids_kg) champsManquants.push('poids_kg');
+    if (!etat_arrivee) champsManquants.push('etat_arrivee');
+    if (!statut) champsManquants.push('statut');
+
+    if (champsManquants.length > 0) {
+        return res.status(400).json({
+            erreur: `Champ(s) manquant(s) : ${champsManquants.join(', ')}`
+        })
+    }
+
     try {
         const result = await pool.query(`
-            INSERT INTO objet (libelle, poids_kg, etat_arrivee, categorie_id, depot_id)
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO objet (libelle, poids_kg, etat_arrivee, statut, prix, date_mise_rayon, categorie_id, depot_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *;
-        `, [libelle, poids_kg || null, etat_arrivee || null, categorie_id, depot_id]);
+        `, [libelle, poids_kg, etat_arrivee, statut, prix || null, date_mise_rayon|| null, categorie_id, depot_id]);
 
         res.status(201).json(result.rows[0]);
   
