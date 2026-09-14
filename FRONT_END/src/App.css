@@ -3,198 +3,278 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Bricolage Grotesque', sans-serif;
+font-family: 'Bricolage Grotesque', sans-serif;
 }
+
+/* =========================
+   STRUCTURE PRINCIPALE
+========================= */
 
 .page {
-  display: flex;
-  min-height: 100vh;
-}
-
-.sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem 1rem;
-  background-color: #1E293B;
-  box-sizing: border-box;
-}
-
-.sidebar-header {
-  padding: 0;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-icon {
-  width: 38px;
-  height: 38px;
-  background-color: #4F46E5;
-  color: #ffffff;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-.logo-text {
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 700;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  white-space: nowrap;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin: 10px 0 0 0;
-}
-
-p.gestion-section {
-  text-transform: uppercase;
-  color: #ffffff;
-  font-size: 12px;
-  opacity: 0.5;
-  letter-spacing: 1px;
-}
-
-.link {
-  padding: 0.55rem 0.75rem;
-  border-radius: 8px;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 400;
-  opacity: 0.65;
-}
-
-.active {
-  background-color: #183159;
-  color: #ffffff;
-  opacity: 1;
-  font-weight: 800;
+display: flex;
+min-height: 100vh;
+width: 100%;
 }
 
 .body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
+flex: 1;
+min-width: 0;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
 }
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+width: 240px;
+min-height: 100vh;
+flex-shrink: 0;
+
+display: flex;
+flex-direction: column;
+
+padding: 1.5rem 1rem;
+
+background-color: #1E293B;
+
+box-sizing: border-box;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.sidebar-header {
+margin-bottom: 2rem;
+}
+
+.logo-container {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.logo-icon {
+width: 35px;
+height: 35px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+background-color: white;
+color: #1E293B;
+
+border-radius: 8px;
+
+font-weight: bold;
+font-size: 1.1rem;
+}
+
+.logo-text {
+color: white;
+font-size: 1.2rem;
+font-weight: bold;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.link {
+display: block;
+
+padding: 12px 15px;
+
+color: #CBD5E1;
+text-decoration: none;
+
+border-radius: 8px;
+
+transition: background-color 0.2s ease,
+color 0.2s ease;
+}
+
+.link:hover {
+background-color: #334155;
+color: white;
+}
+
+.link.active {
+background-color: #334155;
+color: white;
+}
+
+
+/* =========================
+   BAS DE LA SIDEBAR
+========================= */
+
+.sidebar-footer {
+margin-top: 0;
+margin-bottom: 1.5rem;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 10px;
+}
+
+
+
+/* =========================
+   INFORMATIONS BÉNÉVOLE
+========================= */
+
+.benevole-info {
+display: flex;
+align-items: center;
+gap: 10px;
+
+min-width: 0;
+flex: 1;
+
+padding: 10px 12px;
+
+background-color: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.15);
+border-radius: 12px;
+
+overflow: hidden;
+}
+
+.benevole-initiales {
+width: 38px;
+height: 38px;
+
+flex-shrink: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+background-color: rgba(99, 102, 241, 0.25);
+color: #a5b4fc;
+
+border-radius: 50%;
+
+font-weight: bold;
+font-size: 0.9rem;
+}
+
+.benevole-texte {
+display: flex;
+flex-direction: column;
+
+min-width: 0;
+flex: 1;
+}
+
+
+.benevole-nom {
+color: white;
+
+font-size: 0.9rem;
+font-weight: 600;
+
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.benevole-role {
+display: flex;
+align-items: center;
+gap: 4px;
+
+margin-top: 3px;
+
+color: #94A3B8;
+
+font-size: 0.75rem;
+
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+
+/* =========================
+   BOUTON DÉCONNEXION
+========================= */
+
+.logout {
+width: 35px;
+height: 35px;
+
+flex-shrink: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 0;
+
+border: none;
+border-radius: 6px;
+
+background-color: transparent;
+
+color: #CBD5E1;
+
+cursor: pointer;
+
+font-size: 1.1rem;
+}
+
+.logout:hover {
+background-color: #475569;
+color: white;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
 
 .topbar {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 20px 20px;
-  border-bottom: 1px solid #e4e4e7;
+min-height: 64px;
+
+display: flex;
+align-items: center;
+justify-content: flex-end;
+
+padding: 0 2rem;
+
+border-bottom: 1px solid #E2E8F0;
+background-color: white;
+
+box-sizing: border-box;
 }
+
+
+/* =========================
+   CONTENU
+========================= */
 
 .content {
-  flex: 1;
-  padding: 50px;
-  background-color: #F8F9FA;
-}
+flex: 1;
 
-/* ---- Styles partagés entre les pages ---- */
+padding: 2rem;
 
-.main-container {
-  /* conteneur de page réutilisé par ListeObjets, FicheObjet, etc. */
-}
+background-color: #F8FAFC;
 
-.table-container {
-  border: 1px solid #e0e3e8;
-  border-radius: 6px;
-  overflow-x: auto;
-  background-color: white;
-}
-
-.page-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 8px;
-}
-
-/* Bouton de base (liens stylés en boutons) */
-.btn {
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-block;
-  text-align: center;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  color: #aaaaaa;
-  outline: none;
-  cursor: pointer;
-  transition: opacity 0.15s ease-in-out;
-  text-decoration: none;
-}
-
-.btn:link { text-decoration: none; }
-
-.btn:hover {
-  color: #4F46E5;
-  border-color: #4F46E5;
-  background-color: #eeeeee;
-  opacity: 0.85;
-}
-
-/* Tableau global */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0;
-}
-
-thead th {
-  color: #64748B;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-  padding: 18px 16px;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #fafafa;
-}
-
-tbody td {
-  font-size: 14px;
-  padding: 16px;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-tbody tr:last-child td { border-bottom: none; }
-
-tbody tr {
-  transition: background-color 0.15s ease-in-out;
-}
-
-tbody tr:hover { background-color: #f9fafb; }
-
-tfoot td {
-  color: #64748B;
-  font-size: 0.85rem;
-  color: #6b7280;
-  font-weight: 500;
-  padding: 18px 16px;
-  background-color: #fafafa;
-  border-top: 1px solid #e5e7eb;
+box-sizing: border-box;
 }
