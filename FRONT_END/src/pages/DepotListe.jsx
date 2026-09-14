@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {useNavigate} from "react-router"
-import './DepotListe.css'
+import './Liste.css'
 
 function DepotsListe() {
     const navigate = useNavigate()
@@ -17,21 +17,13 @@ function DepotsListe() {
 
     return (
     <>
-     <div className="depot-liste">
+     <div className="main-container">
 
-            {/* =========================
-                TITRE
-            ========================= */}
+            <h2 className="page-title">Gestion des dépôts</h2>
 
-            <div className="entete-depots">
-
-                <h1>Gestion des dépôts</h1>
-
-                <p>
-                    Suivi des dépôts apportés par les donateurs et avancement du tri.
-                </p>
-
-            </div>
+            <p>
+                Suivi des dépôts apportés par les donateurs et avancement du tri.
+            </p>
     
     <div className="table-container">
 
@@ -39,12 +31,12 @@ function DepotsListe() {
 
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>DATE & HEURE</th>
-                    <th>TYPE</th>
-                    <th>DONATEUR</th>
-                    <th>NB OBJETS</th>
-                    <th>ACTIONS</th>
+                    <th><div className="th-filter">ID</div></th>
+                    <th><div className="th-filter">DATE & HEURE</div></th>
+                    <th><div className="th-filter">TYPE</div></th>
+                    <th><div className="th-filter">DONATEUR</div></th>
+                    <th><div className="th-filter">NB OBJETS</div></th>
+                    <th><div className="th-filter">ACTIONS</div></th>
                 </tr>
             </thead>
 
@@ -66,19 +58,19 @@ function DepotsListe() {
                             {depot.type}
                         </td>
 
-                        <td className="donateur">
+                        <td>
                             {depot.nom} {depot.prenom}
                         </td>
 
 
                         <td>
-                            {depot.count} objets
+                            <b>{depot.count} objets</b>
                         </td>
 
                         <td>
-                            <button className="btn-fiche"
+                            <button className="btn-vignette"
                             onClick={() => navigate(`/depots/${depot.id}`)}>
-                                👁 Voir la fiche
+                                Voir la fiche
                             </button>
                         </td>
 
@@ -87,6 +79,14 @@ function DepotsListe() {
                 ))}
 
             </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colSpan={6}>
+                        {depots.length} {depots.length > 1 ? 'dépôts trouvés' : 'dépôt trouvé'}
+                    </td>
+                </tr>
+            </tfoot>
 
         </table>
 

@@ -6,7 +6,8 @@
   font-weight: 600;
   display: inline-block;
   text-align: center;
-  /* border: 1px solid; */
+  border: 1px solid;
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
 }
 
 /* Couleurs par statut */

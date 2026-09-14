@@ -1,0 +1,23 @@
+/* Liste.css — styles communs aux listes (Objets et Dépôts).
+   La structure (main-container, page-title, table-container,
+   table, th/td, tfoot, .btn) est fournie par App.css. */
+
+.main-container p {
+  color: #64748B;
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+/* En-tête de colonne : label seul ou label + filtre */
+.th-filter {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.select-th {
+  font-size: 13px;
+}

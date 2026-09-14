@@ -1,4 +1,4 @@
-import './ListeObjets.css';
+import './Liste.css'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import StatutBadge from '../composants/StatutBadge';
@@ -62,17 +62,17 @@ export default function ListeObjets() {
         <table>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Nom de l'objet</th>
+              <th><div className="th-filter">Id</div></th>
+              <th><div className="th-filter">Nom de l'objet</div></th>
               
               {/* Filtre Catégorie */}
               <th>
                 <div className="th-filter">
-                  <span>Catégorie : </span>
-                  <select 
-                    value={categorieFiltre} 
-                    onChange={(e) => setCategorieFiltre(e.target.value)}
+                  Catégorie
+                  <select
                     className="select-th"
+                    value={categorieFiltre}
+                    onChange={(e) => setCategorieFiltre(e.target.value)}
                   >
                     <option value="">Toutes</option>
                     {categoriesUniques.map((cat) => (
@@ -85,11 +85,11 @@ export default function ListeObjets() {
               {/* Filtre Statut */}
               <th>
                 <div className="th-filter">
-                  <span>Statut : </span>
-                  <select 
-                    value={statutFiltre} 
-                    onChange={(e) => setStatutFiltre(e.target.value)}
+                  Statut
+                  <select
                     className="select-th"
+                    value={statutFiltre}
+                    onChange={(e) => setStatutFiltre(e.target.value)}
                   >
                     <option value="">Tous</option>
                     {statutsUniques.map((statut) => (
@@ -99,19 +99,19 @@ export default function ListeObjets() {
                 </div>
               </th>
 
-              <th>Actions</th>
+              <th><div className="th-filter">Actions</div></th>
             </tr>
           </thead>
           <tbody>
             {objetsFiltres.length > 0 ? (
               objetsFiltres.map((objet) => (
                 <tr key={objet.id}>
-                  <td>#{objet.id}</td>
+                  <td>#OBJ-{String(objet.id).padStart(3, '0')}</td>
                   <td><b>{objet.libelle}</b></td>
                   <td>{objet.categorie_libelle}</td>
                   <td><StatutBadge statut={objet.statut} /></td>
                   <td>
-                    <Link to={`/objets/${objet.id}`} className="btn">Voir la fiche</Link>
+                    <Link to={`/objets/${objet.id}`} className="btn-vignette">Voir la fiche</Link>
                   </td>
                 </tr>
               ))

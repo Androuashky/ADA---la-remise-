@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import Categorie from '../composants/Categorie';
+import '../composants/Fiche.css';
 import './NouveauObjet.css'
 
 function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
@@ -80,18 +81,19 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
     return (
      <form
-            className="formulaire-objet"
+            className="form-card card"
             onSubmit={handleSubmit}
         >
+            <h3>Ajout d'un nouvel objet</h3>
             <Categorie setCategorie={setCategorie}/>
             <div className="ligne-formulaire">
 
                 {/* DÉSIGNATION */}
-                <div className="groupe-champ groupe-libelle">
+                <div className="form-group">
                     <label>DÉSIGNATION DE L'OBJET</label>
 
                     <input
-                        className="champ-objet"
+                        className="champ-form"
                         type="text"
                         placeholder="Ex : Chaise en bois"
                         value={libelle}
@@ -104,11 +106,11 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
 
                 {/* CATÉGORIE */}
-                <div className="groupe-champ">
+                <div className="form-group">
                     <label>CATÉGORIE</label>
 
                     <select
-                        className="champ-objet"
+                        className="champ-form"
                         value={categorie_id}
                         onChange={(e) =>
                             setCategorie_id(e.target.value)
@@ -132,11 +134,11 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
 
                 {/* POIDS */}
-                <div className="groupe-champ">
+                <div className="form-group">
                     <label>POIDS (KG)</label>
 
                     <input
-                        className="champ-objet"
+                        className="champ-form"
                         type="text"
                         inputMode="decimal"
                         placeholder="0,00"
@@ -153,11 +155,11 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
 
                 {/* PRIX */}
-                <div className="groupe-champ">
+                <div className="form-group">
                     <label>PRIX ESTIMÉ (€)</label>
 
                     <input
-                        className="champ-objet"
+                        className="champ-form"
                         type="text"
                         inputMode="decimal"
                         placeholder="0,00"
@@ -178,11 +180,11 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
             <div className="ligne-formulaire">
 
                 {/* ÉTAT À L'ARRIVÉE */}
-                <div className="groupe-champ">
+                <div className="form-group">
                     <label>ÉTAT À L'ARRIVÉE</label>
 
                     <select
-                        className="champ-objet"
+                        className="champ-form"
                         value={etat_arrivee}
                         onChange={(e) =>
                             setEtat_arrivee(e.target.value)
@@ -209,11 +211,11 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
 
                 {/* STATUT */}
-                <div className="groupe-champ">
+                <div className="form-group">
                     <label>STATUT</label>
 
                     <select
-                        className="champ-objet"
+                        className="champ-form"
                         value={statut}
                         onChange={(e) =>
                             setStatut(e.target.value)
@@ -248,11 +250,11 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
 
                 {/* DATE */}
-                <div className="groupe-champ">
+                <div className="form-group">
                     <label>DATE DE MISE EN RAYON</label>
 
                     <input
-                        className="champ-objet"
+                        className="champ-form"
                         type="date"
                         value={date_mise_rayon}
                         onChange={(e) =>
@@ -267,21 +269,21 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
 
 
             {/* BOUTON */}
-           <div className="actions-formulaire">
+           <div className="form-actions">
 
                 <button
-                    className="btn-valider-objet"
-                    type="submit"
-                >
-                    Ajouter l'objet
-                </button>
-
-                <button
-                    className="btn-annuler-objet"
+                    className="btn-neutre"
                     type="button"
                     onClick={onAnnuler}
                 >
                     Annuler
+                </button>
+
+                <button
+                    className="btn-primaire"
+                    type="submit"
+                >
+                    Ajouter l'objet
                 </button>
 
             </div>
