@@ -109,6 +109,14 @@ export default function FicheObjet() {
                     {objet.prix ? `${objet.prix} €` : '-'}
                   </span>
                 </div>
+                <div className="info-item">
+                  <span className="info-label">Mise en rayon</span>
+                  <span className="info-value">
+                    {objet.date_mise_rayon
+                      ? new Date(objet.date_mise_rayon).toLocaleDateString('fr-FR')
+                      : '-'}
+                  </span>
+                </div>
               </div>
             </div>
 

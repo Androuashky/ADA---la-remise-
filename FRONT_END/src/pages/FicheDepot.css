@@ -60,5 +60,7 @@
 }
 
 .btn-ajouter-objet {
-  margin-top: 24px;
+  display: block;
+  min-width: 200px;
+  margin: 24px auto 0;
 }

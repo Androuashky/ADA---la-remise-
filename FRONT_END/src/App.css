@@ -372,6 +372,14 @@ box-sizing: border-box;
   margin: 0 0 8px;
 }
 
+/* Titre de section (bloc de cartes) */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 20px;
+}
+
 /* Carte blanche générique */
 .card {
   background: #ffffff;

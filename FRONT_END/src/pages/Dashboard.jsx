@@ -1,5 +1,6 @@
-
 import { useEffect, useState } from "react";
+import StatutBadge from "../composants/StatutBadge";
+import "../composants/Fiche.css";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -20,126 +21,114 @@ function Dashboard() {
             });
     }, []);
 
+    const totalObjets = (stats?.objets_par_statut ?? [])
+        .reduce((total, statut) => total + statut.nombre_objets, 0);
+
     return (
-        <div className="dashboard-page">
+        <div className="main-container">
+            <h1 className="page-title">Dashboard</h1>
+            <p>Vue d'ensemble de l'activité de la ressourcerie.</p>
 
-            <div className="dashboard-container">
+            <div className="stats-cards">
 
-                <header className="dashboard-header">
-                    <div>
-                        <h1>Dashboard</h1>
-                        <p>Vue d'ensemble de l'activité de la ressourcerie.</p>
+                <div className="card stat-card">
+                    <span className="info-label">OBJETS EN RAYON</span>
+                    <strong className="stat-value">
+                        {stats?.nombre_objets_en_rayon}
+                    </strong>
+                    <span className="stat-icon">📦</span>
+                </div>
+
+                <div className="card stat-card">
+                    <span className="info-label">POIDS TOTAL REÇU</span>
+                    <strong className="stat-value">
+                        {stats?.poids_total_recu_kg} kg
+                    </strong>
+                    <span className="stat-icon">⚖️</span>
+                </div>
+
+                <div className="card stat-card">
+                    <span className="info-label">TOTAL D'OBJETS</span>
+                    <strong className="stat-value">
+                        {totalObjets}
+                    </strong>
+                    <span className="stat-icon">✓</span>
+                </div>
+
+            </div>
+
+            <section className="card">
+                <h3>Objets par statut</h3>
+
+                <div className="status-list">
+
+                    {stats?.objets_par_statut.map((statut) => (
+                        <div
+                            className="status-card"
+                            key={statut.statut}
+                        >
+                            <StatutBadge statut={statut.statut} />
+                            <strong className="stat-value">{statut.nombre_objets}</strong>
+                        </div>
+                    ))}
+
+                </div>
+            </section>
+
+            <section className="consultation-section">
+
+                <h2 className="section-title">Que voulez-vous consulter ?</h2>
+
+                <div className="consultation-list">
+
+                    <div className="card consultation-card">
+
+                        <div className="consultation-top">
+
+                            <div className="consultation-title">
+                                <span>📦</span>
+                                <h3>Gestion des objets</h3>
+                            </div>
+
+                            <span className="consultation-arrow">→</span>
+
+                        </div>
+
+                        <p>
+                            Consultez l'inventaire, modifiez les prix,
+                            changez les statuts (en rayon, vendu,
+                            recyclé) et filtrez par catégorie.
+                        </p>
+
                     </div>
-                </header>
 
-                <div className="stats-cards">
+                    <div className="card consultation-card">
 
-                    <div className="stat-card">
-                        <span className="stat-title">OBJETS EN RAYON</span>
-                        <strong>
-                            {stats?.nombre_objets_en_rayon}
-                        </strong>
-                        <span className="stat-icon">📦</span>
-                    </div>
+                        <div className="consultation-top">
 
-                    <div className="stat-card">
-                        <span className="stat-title">POIDS TOTAL REÇU</span>
-                        <strong>
-                            {stats?.poids_total_recu_kg} kg
-                        </strong>
-                        <span className="stat-icon">⚖️</span>
-                    </div>
+                            <div className="consultation-title">
+                                <span>🏠</span>
+                                <h3>Gestion des dépôts</h3>
+                            </div>
 
-                    <div className="stat-card">
-                        <span className="stat-title">TOTAL D'OBJETS</span>
-                        <strong>
-                            {stats?.objets_par_statut.reduce(
-                                (total, statut) => total + statut.nombre_objets,
-                                0
-                            )}
-                        </strong>
-                        <span className="stat-icon">✓</span>
+                            <span className="consultation-arrow">→</span>
+
+                        </div>
+
+                        <p>
+                            Suivez les lots apportés par les donateurs,
+                            créez de nouveaux reçus de dépôt et
+                            attribuez les objets aux bénévoles.
+                        </p>
+
                     </div>
 
                 </div>
 
-                <section className="status-section">
-
-                    <h2>Objets par statut</h2>
-
-                    <div className="status-list">
-
-                        {stats?.objets_par_statut.map((statut) => (
-                            <div
-                                className="status-card"
-                                key={statut.statut}
-                            >
-                                <span>{statut.statut}</span>
-                                <strong>{statut.nombre_objets}</strong>
-                            </div>
-                        ))}
-
-                    </div>
-
-                </section>
-
-                <section className="consultation-section">
-
-                    <h2>Que voulez-vous consulter ?</h2>
-
-                    <div className="consultation-list">
-
-                        <div className="consultation-card objets-card">
-
-                            <div className="consultation-top">
-
-                                <div className="consultation-title">
-                                    <span>📦</span>
-                                    <h3>Gestion des objets</h3>
-                                </div>
-
-                                <span className="consultation-arrow">→</span>
-
-                            </div>
-
-                            <p>
-                                Consultez l'inventaire, modifiez les prix,
-                                changez les statuts (en rayon, vendu,
-                                recyclé) et filtrez par catégorie.
-                            </p>
-
-                        </div>
-
-                        <div className="consultation-card depots-card">
-
-                            <div className="consultation-top">
-
-                                <div className="consultation-title">
-                                    <span>🏠</span>
-                                    <h3>Gestion des dépôts</h3>
-                                </div>
-
-                                <span className="consultation-arrow">→</span>
-
-                            </div>
-
-                            <p>
-                                Suivez les lots apportés par les donateurs,
-                                créez de nouveaux reçus de dépôt et
-                                attribuez les objets aux bénévoles.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-            </div>
+            </section>
 
         </div>
     );
 }
 
 export default Dashboard;
-

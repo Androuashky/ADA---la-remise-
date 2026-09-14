@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-import "./benevole.css";
+import "../composants/Fiche.css";
+import "./Benevole.css";
 
 function Benevole({ setBenevole }) {
 
@@ -60,23 +61,20 @@ function Benevole({ setBenevole }) {
 
             <div className="benevole-container">
 
-                <div className="logo">
-
-                    <span>A</span>
-
-                    <strong>
+                <div className="logo-container">
+                    <div className="logo-icon">A</div>
+                    <span className="logo-text">
                         AdaRemise
-                    </strong>
-
+                    </span>
                 </div>
 
 
-                <h1>
+                <h1 className="page-title">
                     Bienvenue à la Remise
                 </h1>
-                <h2>
-                    Rien ne se perd, tout se réinvente !                    
-                </h2>
+                <p className="fiche-subtitle">
+                    Rien ne se perd, tout se réinvente !
+                </p>
 
 
                 <p className="description">
@@ -86,7 +84,7 @@ function Benevole({ setBenevole }) {
 
 
                 <input
-                    className="search"
+                    className="champ-form search"
                     type="text"
                     placeholder="Rechercher un bénévole..."
                     value={recherche}
@@ -101,7 +99,7 @@ function Benevole({ setBenevole }) {
                     {benevoleFiltres.map((benevole) => (
 
                         <div
-                            className="benevole-card"
+                            className="benevole-card card"
                             key={benevole.id}
                             onClick={() =>
                                 handleClicProfil(benevole)
