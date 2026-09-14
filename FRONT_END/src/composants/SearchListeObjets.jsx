@@ -1,6 +1,6 @@
-import './SearchBar.css';
+import './SearchListeObjets.css';
 
-export default function SearchBar({ value, onChange }) {
+export default function SearchListeObjets({ value, onChange }) {
   const soumettre = (e) => {
     e.preventDefault(); // Évite le rechargement de la page au Submit
   };

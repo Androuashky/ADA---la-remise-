@@ -1,6 +1,6 @@
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
-import SearchBar from './composants/SearchBar';
+// import SearchBar from './composants/SearchBar';
 import Identification from './pages/Identification';
 import ListeObjets from './pages/ListeObjets';
 import FicheObjet from './pages/FicheObjet';
@@ -15,18 +15,24 @@ export default function App() {
     <div className="page">
       {/* Barre latérale gauche */}
       <aside className="sidebar">
-        <h1 className="logo">AdaRemise 📦</h1>
+        <div className="sidebar-header">
+          <div className="logo-container">
+            <div className="logo-icon">A</div>
+            <span className="logo-text">AdaRemise</span>
+          </div>
+        </div>
         <nav className="nav">
-          <NavLink to="/tableaudebord"  className={({ isActive }) => isActive ? "link active" : "link"}>Tableau de bord</NavLink>
-          <NavLink to="/objets"         className={({ isActive }) => isActive ? "link active" : "link"}>Objets</NavLink>
-          <NavLink to="/depots"         className={({ isActive }) => isActive ? "link active" : "link"}>Dépôts</NavLink>
+          <p className="gestion-section">Gestion</p>
+          <NavLink to="/tableaudebord"  className={({ isActive }) => isActive ? "link active" : "link"}>📊 Tableau de bord</NavLink>
+          <NavLink to="/objets"         className={({ isActive }) => isActive ? "link active" : "link"}>📦 Objets</NavLink>
+          <NavLink to="/depots"         className={({ isActive }) => isActive ? "link active" : "link"}>🗳️ Dépôts</NavLink>
         </nav>
       </aside>
 
       {/* Colonne de droite : searchbar + page courante */}
       <div className="body">
         <header className="topbar">
-          <SearchBar />
+          {/* <SearchBar /> */}
         </header>
         <main className="content">
           <Routes>
