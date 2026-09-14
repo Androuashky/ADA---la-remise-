@@ -40,6 +40,7 @@ depotsRouter.get("/:id", async (req, res, next) => {
             personne.nom AS personne_nom,
             personne.prenom AS personne_prenom,
             personne.telephone AS personne_telephone,
+            COALESCE(json_agg(objet.id) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet_id,
             COALESCE(json_agg(objet.libelle) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet,
             COALESCE(json_agg(objet.prix) FILTER (WHERE objet.id IS NOT NULL), '[]'::json) AS liste_objet_prix
             FROM depot
