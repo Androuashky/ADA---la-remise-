@@ -1,9 +1,4 @@
-// src/pages/Identification.jsx — domaine C : écran « Qui es-tu ? »
-export default function Identification() {
-  return (
-    <div>
-      <h1>Identification</h1>
-      Liste des bénévoles au format carte
-    </div>
-  );
+// src/pages/Benevole.jsx — domaine C : écran « Qui es-tu ? »
+export default function Benevole() {
+  return <h1>Benevole — à venir</h1>;
 }

@@ -9,7 +9,7 @@ Règles à respecter par tous les membres du projet. Ce fichier est la référen
 ### Nom des branches
 
 - Format : `prenom/domaine-tache` — tout en **minuscules**, mots séparés par des **tirets**.
-- Exemples : `alain/objets-liste`, `julie/depot-fiche`, `sara/identification`.
+- Exemples : `alain/objets-liste`, `julie/depot-fiche`, `sara/Benevole`.
 - Privilégie les **initiales** si le prénom est long (`aj/objets-liste`).
 
 ### Règles de base
@@ -52,7 +52,7 @@ Règles à respecter par tous les membres du projet. Ce fichier est la référen
 
 - **1 page = 1 fichier** dans `src/pages/` (ex. `ListeObjets.jsx`).
 - Les appels API passent par un utilitaire central (`src/api.js`) — pas de `fetch` isolé partout.
-- Le layout commun (header, nav, identification) est **dans le socle** : les pages n'y écrivent pas.
+- Le layout commun (header, nav, Benevole) est **dans le socle** : les pages n'y écrivent pas.
 - Les états **chargement / erreur / vide** sont gérés sur chaque écran qui affiche des données.
 - Tout texte visible à l'écran est en **français**.
 

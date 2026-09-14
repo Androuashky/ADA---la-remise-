@@ -2,14 +2,13 @@
 import { Routes, Route, NavLink } from 'react-router';
 import { useState } from 'react';
 import SearchBar from './composants/SearchBar';
-// import SearchBar from './composants/SearchBar';
-import Identification from './pages/Identification';
+import Benevole from './pages/Benevole';
 import ListeObjets from './pages/ListeObjets';
 import FicheObjet from './pages/FicheObjet';
 import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
+import Dashboard from './pages/Dashboard';
 import FormulaireDepot from './pages/NouveauDepot';
-import TableauDeBord from './pages/TableauDeBord';
 import FormulaireObjet from './pages/NouveauObjet';
 import BoutonNvDepot from './composants/BoutonNvDepot';
 import './App.css';
@@ -29,10 +28,9 @@ export default function App() {
           </div>
         </div>
         <nav className="nav">
-          <p className="gestion-section">Gestion</p>
-          <NavLink to="/tableaudebord"  className={({ isActive }) => isActive ? "link active" : "link"}>📊 Tableau de bord</NavLink>
-          <NavLink to="/objets"         className={({ isActive }) => isActive ? "link active" : "link"}>📦 Objets</NavLink>
-          <NavLink to="/depots"         className={({ isActive }) => isActive ? "link active" : "link"}>🗳️ Dépôts</NavLink>
+          <NavLink to="/dashboard"  className={({ isActive }) => isActive ? "link active" : "link"}>Dashboard</NavLink>
+          <NavLink to="/objets"         className={({ isActive }) => isActive ? "link active" : "link"}>Objets</NavLink>
+          <NavLink to="/depots"         className={({ isActive }) => isActive ? "link active" : "link"}>Dépôts</NavLink>
         </nav>
       </aside>
     
@@ -45,8 +43,8 @@ export default function App() {
         </header>
         <main className="content">
           <Routes>
-            <Route index element={<Identification />} />
-            <Route path="/tableaudebord" element={<TableauDeBord />} />
+            <Route index element={<Benevole />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/objets" element={<ListeObjets />} />
             <Route path="/objets/:id" element={<FicheObjet />} />
             <Route path="/depots" element={<DepotListe />} />
