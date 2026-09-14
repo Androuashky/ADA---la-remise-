@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Donnateur from '../composants/Donnateur';
-import './NouveauDepot.css'
- 
+import '../composants/Fiche.css';
+
 
 function FormulaireDepot({donnateur,setDonnateur}) {
     const [type, setType] = useState('')
@@ -46,138 +46,120 @@ function FormulaireDepot({donnateur,setDonnateur}) {
     }
 
     return (
-    <form className="formulaire-depot" onSubmit={handleSubmit}>
-      <Donnateur setDonnateur={setDonnateur} />
-
-
-      <div
-        className="retour-depots"
-        onClick={() => navigate('/depots')}
+    <div className="fiche-page">
+        <div
+            className="btn-retour"
+            onClick={() => navigate('/depots')}
         >
-          ← Retour à la liste des dépôts
-      </div>
+            ← Retour à la liste des dépôts
+        </div>
 
-      {/* TITRE */}
-      <h1>Enregistrer un dépôt</h1>
-
-        <p className="description-depot">
+        <div className="fiche-header">
+            <h1 className="page-title">Enregistrer un dépôt</h1>
+            <p className="fiche-subtitle">
                 Saisissez les détails du lot apporté.
-        </p>
+            </p>
+        </div>
 
-      {/* INFORMATIONS GÉNÉRALES */}
-        <section className="bloc-informations">
+        <form className="form-card card" onSubmit={handleSubmit}>
+            <h3>Informations générales</h3>
+            <Donnateur setDonnateur={setDonnateur} />
 
-          <h2>Informations générales</h2>
+            <div className="ligne-formulaire">
 
-          <div className="ligne-separation"></div>
+                {/* DONATEUR */}
+                <div className="form-group">
+                    <label>DONATEUR</label>
 
-            <div className="grille-informations">
+                    <select
+                        className="champ-form"
+                        value={personne_id}
+                        onChange={(e) =>
+                            setPersonne_id(e.target.value)
+                        }
+                    >
+                        <option value="">
+                            Sélectionner un donateur
+                        </option>
 
-
-                    {/* DONATEUR */}
-                    <div className="champ-depot">
-
-                        <label>DONATEUR</label>
-
-                        <select
-                            value={personne_id}
-                            onChange={(e) =>
-                                setPersonne_id(e.target.value)
-                            }
-                        >
-
-                            <option value="">
-                                Sélectionner un donateur
+                        {donnateur.map(d => (
+                            <option
+                                key={d.id}
+                                value={d.id}
+                            >
+                                {d.prenom} {d.nom}
                             </option>
-
-                            {donnateur.map(d => (
-                                <option
-                                    key={d.id}
-                                    value={d.id}
-                                >
-                                    {d.prenom} {d.nom}
-                                </option>
-                            ))}
-
-                        </select>
-
-                    </div>
+                        ))}
+                    </select>
+                </div>
 
 
-                    {/* TELEPHONE */}
-                    <div className="champ-depot">
+                {/* TELEPHONE */}
+                <div className="form-group">
+                    <label>TÉLÉPHONE DU DONATEUR</label>
 
-                        <label>TÉLÉPHONE DU DONATEUR</label>
-
-                        <input
-                            type="text"
-                            value={
-                                donateurSelectionne
-                                    ? donateurSelectionne.telephone
-                                    : ''
-                            }
-                            placeholder="Sélectionnez un donateur"
-                            readOnly
-                        />
-
-                    </div>
-
-
-                    {/* DATE */}
-                    <div className="champ-depot">
-
-                        <label>DATE DU DÉPÔT</label>
-
-                        <input
-                            type="date"
-                            value={date_depot}
-                            onChange={(e) =>
-                                setDate_depot(e.target.value)
-                            }
-                        />
-
-                    </div>
+                    <input
+                        className="champ-form"
+                        type="text"
+                        value={
+                            donateurSelectionne
+                                ? donateurSelectionne.telephone
+                                : ''
+                        }
+                        placeholder="Sélectionnez un donateur"
+                        readOnly
+                    />
+                </div>
 
 
-                    {/* TYPE */}
-                    <div className="champ-depot">
+                {/* DATE */}
+                <div className="form-group">
+                    <label>DATE DU DÉPÔT</label>
 
-                        <label>TYPE DE DÉPÔT</label>
+                    <input
+                        className="champ-form"
+                        type="date"
+                        value={date_depot}
+                        onChange={(e) =>
+                            setDate_depot(e.target.value)
+                        }
+                    />
+                </div>
 
-                        <select
-                            value={type}
-                            onChange={(e) =>
-                                setType(e.target.value)
-                            }
-                        >
 
-                            <option value="">
-                                Sélectionner
-                            </option>
+                {/* TYPE */}
+                <div className="form-group">
+                    <label>TYPE DE DÉPÔT</label>
 
-                            <option value="boutique">
-                                Boutique
-                            </option>
+                    <select
+                        className="champ-form"
+                        value={type}
+                        onChange={(e) =>
+                            setType(e.target.value)
+                        }
+                    >
+                        <option value="">
+                            Sélectionner
+                        </option>
 
-                            <option value="domicile">
-                                Domicile
-                            </option>
+                        <option value="boutique">
+                            Boutique
+                        </option>
 
-                        </select>
-
-                    </div>
+                        <option value="domicile">
+                            Domicile
+                        </option>
+                    </select>
+                </div>
 
             </div>
 
-      </section>
-
-
             {/* BOUTONS */}
-            <div className="actions-depot">
+            <div className="form-actions">
 
                 <button
                     type="button"
-                    className="btn-annuler"
+                    className="btn-neutre"
                     onClick={() => navigate('/depots')}
                 >
                     Annuler
@@ -185,14 +167,14 @@ function FormulaireDepot({donnateur,setDonnateur}) {
 
                 <button
                     type="submit"
-                    className="btn-enregistrer"
+                    className="btn-primaire"
                 >
                     Enregistrer le dépôt
                 </button>
 
             </div>
-
-    </form>
+        </form>
+    </div>
     )  
 }
 

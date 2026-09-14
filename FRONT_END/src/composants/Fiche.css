@@ -1,0 +1,179 @@
+/* Fiche.css — styles communs aux fiches (Objet et Dépôt).
+   Le layout de base (card, btn-retour, page-title, btn-primaire)
+   est fourni par App.css. */
+
+.fiche-page {
+  margin: 0 auto;
+}
+
+.fiche-header {
+  margin-bottom: 32px;
+}
+
+.fiche-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.fiche-subtitle {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+/* Grille d'infos */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-label {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Formulaire */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+/* Champ de saisie commun (input/select) */
+.champ-form {
+  width: 100%;
+  height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #fff;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.champ-form::placeholder {
+  color: #9ba8ba;
+}
+
+.champ-form:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+select.champ-form {
+  cursor: pointer;
+}
+
+/* Champ en lecture seule (ex : téléphone du donateur) */
+.champ-form:read-only {
+  background-color: #e9ebef;
+  color: #71829d;
+}
+
+/* Bouton d'action pleine largeur */
+.btn-full {
+  width: 100%;
+}
+
+/* Messages */
+.message {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.message-erreur {
+  color: #dc2626;
+}
+
+.message-success {
+  color: #16a34a;
+}
+
+/* Chargement */
+.loading-placeholder {
+  padding: 60px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Carte contenant un formulaire */
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Barre d'actions d'un formulaire */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+@media (max-width: 650px) {
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn-primaire,
+  .form-actions .btn-secondaire,
+  .form-actions .btn-neutre {
+    width: 100%;
+  }
+}
+
+/* Ligne de champs (grille de formulaire) */
+.ligne-formulaire {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 28px;
+  align-items: end;
+}
+
+.ligne-formulaire:nth-of-type(2) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1100px) {
+  .ligne-formulaire,
+  .ligne-formulaire:nth-of-type(2) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .ligne-formulaire,
+  .ligne-formulaire:nth-of-type(2) {
+    grid-template-columns: 1fr;
+  }
+}
