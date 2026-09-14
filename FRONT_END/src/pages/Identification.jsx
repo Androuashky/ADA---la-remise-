@@ -1,4 +1,4 @@
-// src/pages/Identification.jsx — domaine C : écran « Qui es-tu ? »
-export default function Identification() {
-  return <h1>Identification — à venir</h1>;
+// src/pages/Benevole.jsx — domaine C : écran « Qui es-tu ? »
+export default function Benevole() {
+  return <h1>Benevole — à venir</h1>;
 }

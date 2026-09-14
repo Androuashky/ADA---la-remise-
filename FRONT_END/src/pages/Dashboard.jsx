@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
@@ -5,10 +6,17 @@ function Dashboard() {
     const [stats, setStats] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/stats")
-            .then((response) => response.json())
-            .then((data) => {
-                setStats(data);
+        Promise.all([
+            fetch("http://localhost:3000/api/stats/par-statut").then((response) => response.json()),
+            fetch("http://localhost:3000/api/stats/poids-total").then((response) => response.json()),
+            fetch("http://localhost:3000/api/stats/en-rayon").then((response) => response.json())
+        ])
+            .then(([objetsParStatut, poidsTotal, objetsEnRayon]) => {
+                setStats({
+                    objets_par_statut: objetsParStatut,
+                    poids_total_recu_kg: poidsTotal.poids_total_recu_kg,
+                    nombre_objets_en_rayon: objetsEnRayon.objets_en_rayon
+                });
             });
     }, []);
 
@@ -19,7 +27,7 @@ function Dashboard() {
 
                 <header className="dashboard-header">
                     <div>
-                        <h1>Tableau de bord</h1>
+                        <h1>Dashboard</h1>
                         <p>Vue d'ensemble de l'activité de la ressourcerie.</p>
                     </div>
                 </header>
@@ -134,3 +142,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+

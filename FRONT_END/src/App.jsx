@@ -1,12 +1,12 @@
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
 import SearchBar from './composants/SearchBar';
-import Identification from './pages/Identification';
+import Benevole from './pages/Benevole';
 import ListeObjets from './pages/ListeObjets';
 import FicheObjet from './pages/FicheObjet';
 import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
-import TableauDeBord from './pages/TableauDeBord';
+import Dashboard from './pages/Dashboard';
 import './App.css';
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
       <aside className="sidebar">
         <h1 className="logo">AdaRemise 📦</h1>
         <nav className="nav">
-          <NavLink to="/tableaudebord"  className={({ isActive }) => isActive ? "link active" : "link"}>Tableau de bord</NavLink>
+          <NavLink to="/dashboard"  className={({ isActive }) => isActive ? "link active" : "link"}>Dashboard</NavLink>
           <NavLink to="/objets"         className={({ isActive }) => isActive ? "link active" : "link"}>Objets</NavLink>
           <NavLink to="/depots"         className={({ isActive }) => isActive ? "link active" : "link"}>Dépôts</NavLink>
         </nav>
@@ -29,8 +29,8 @@ export default function App() {
         </header>
         <main className="content">
           <Routes>
-            <Route index element={<Identification />} />
-            <Route path="/tableaudebord" element={<TableauDeBord />} />
+            <Route index element={<Benevole />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/objets" element={<ListeObjets />} />
             <Route path="/objets/:id" element={<FicheObjet />} />
             <Route path="/depots" element={<DepotListe />} />
