@@ -20,7 +20,7 @@ objetsRouter.get("/", async (req, res, next) => {
           JOIN categorie ON objet.categorie_id = categorie.id
           WHERE objet.statut = COALESCE($1::statut_objet, objet.statut)
           AND objet.categorie_id = COALESCE($2::integer, objet.categorie_id)
-          ORDER BY objet.id ASC
+          ORDER BY objet.id DESC
           `, [req.query.statut || null, req.query.categorie_id || null]
         );
 

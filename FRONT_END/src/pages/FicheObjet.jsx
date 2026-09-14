@@ -1,3 +1,4 @@
+import '../composants/Fiche.css';
 import './FicheObjet.css';
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
@@ -68,17 +69,17 @@ export default function FicheObjet() {
 
   return (
     <div className="main-container">
-      <div className="fiche-container">
+      <div className="fiche-page">
         <Link to="/objets" className="btn-retour">
           ← Retour à la liste d'objets
         </Link>
 
         <div className="fiche-header">
-          <div className="header-title-row">
+          <div className="fiche-title-row">
             <h1 className="page-title">{objet.libelle}</h1>
             <StatutBadge statut={objet.statut} />
           </div>
-          <p className="header-subtitle">
+          <p className="fiche-subtitle">
             Identifiant : #{objet.id} - Ajouté le {new Date(objet.date_depot).toLocaleDateString('fr-FR')}
           </p>
         </div>
@@ -119,7 +120,7 @@ export default function FicheObjet() {
                     {objet.personne_prenom} {objet.personne_nom}
                   </span>
                   <span className="depot-link">
-                    Dépôt lié : <Link to={`/depots/${objet.depot_id}`}>#{objet.depot_id}</Link>
+                    Dépôt lié : <Link to={`/depots/${objet.depot_id}`} className="btn-vignette">#{objet.depot_id}</Link>
                   </span>
                 </div>
               </div>
@@ -130,10 +131,10 @@ export default function FicheObjet() {
             <div className="card">
               <h3>Changer le statut</h3>
               <div className="form-group">
-                <label htmlFor="select-statut">Nouveau statut</label>
+                <label htmlFor="select-statut" className='info-label'>Nouveau statut</label>
                 <select
                   id="select-statut"
-                  className="select-statut"
+                  className="champ-form"
                   value={statutSelectionne}
                   onChange={(e) => {
                     setStatutSelectionne(e.target.value);
@@ -148,14 +149,14 @@ export default function FicheObjet() {
                 </select>
               </div>
                   <button
-                    className="btn-update-statut"
+                    className="btn-primaire btn-full"
                     onClick={modifierStatut}
                     disabled={statutSelectionne === objet.statut}
                   >
                     Mettre à jour le statut
                   </button>
                   {message && (
-                    <p className={`statut-message message-${message.type}`}>{message.texte}</p>
+                    <p className={`message message-${message.type}`}>{message.texte}</p>
                   )}
             </div>
           </div>

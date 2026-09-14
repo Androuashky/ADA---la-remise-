@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router";
+import '../composants/Fiche.css'
 import './FicheDepot.css'
 import FormulaireObjet from './NouveauObjet';
 
@@ -24,7 +25,7 @@ function FicheDepot({ categorie, setCategorie }) {
 
     if (depotcarte.length === 0) { 
         return ( 
-        <div className="fiche-depot-loading"> 
+        <div className="loading-placeholder"> 
         Chargement... 
         </div> ) 
         }
@@ -32,34 +33,33 @@ function FicheDepot({ categorie, setCategorie }) {
 
     return (
         <>
-       <div className="fiche-depot-page">
+       <div className="fiche-page">
 
             <div
-                className="lien-retour"
+                className="btn-retour"
                 onClick={() => navigate('/depots')}
             >
                 ← Retour à la liste des dépôts
             </div>
 
 
-            <div className="entete-depot">
+            <div className="fiche-header">
 
-                <h1>Dépôt #{id}</h1>
+                <h1 className="page-title">Dépôt #{String(id).padStart(3, '0')}</h1>
+
+                <p className="fiche-subtitle">
+
+                    Enregistré le {depotcarte.date_depot}
+
+                </p>
 
             </div>
-
-
-            <p className="date-depot">
-
-                Enregistré le {depotcarte.date_depot}
-
-            </p>
 
 
             <div className="cartes-info">
 
 
-                <div className="carte">
+                <div className="card">
 
                     <span className="carte-label">
                         INFORMATIONS DONATEUR
@@ -80,7 +80,7 @@ function FicheDepot({ categorie, setCategorie }) {
                 </div>
 
 
-                <div className="carte">
+                <div className="card">
 
                     <span className="carte-label">
                         ESTIMATION TOTALE
@@ -110,29 +110,18 @@ function FicheDepot({ categorie, setCategorie }) {
 
             <div className="carte-tableau">
 
-
-                <div className="tableau-entete">
-
-                    <h2>
-                        Articles contenus dans ce dépôt
-                    </h2>
-
-                    <span className="nombre-articles">
-
-                        {depotcarte.liste_objet.length} article
-                        {depotcarte.liste_objet.length > 1 ? 's' : ''}
-                        {' '}
-                        référencé
-                        {depotcarte.liste_objet.length > 1 ? 's' : ''}
-
-                    </span>
-
-                </div>
-
-
-                <table className="table-container">
+                <div className="table-container">
+                    <table>
 
                     <thead>
+
+                        <tr>
+                            <td colSpan={4} className="tableau-entete">
+                                    <h3>
+                                        Articles contenus dans ce dépôt
+                                    </h3>
+                            </td>
+                        </tr>
 
                         <tr>
 
@@ -171,12 +160,12 @@ function FicheDepot({ categorie, setCategorie }) {
 
                                     <td>
                                         <button
-                                            className="btn-voir-fiche"
+                                            className="btn-vignette"
                                             onClick={() => {
                                                 navigate(`/objets/${objetId}`);
                                             }}
                                         >
-                                            👁 Voir la fiche
+                                            Voir la fiche
                                         </button>
                                     </td>
                                 </tr>
@@ -185,7 +174,20 @@ function FicheDepot({ categorie, setCategorie }) {
 
                     </tbody>
 
+                    <tfoot>
+                        <tr>
+                            <td colSpan={4}>
+                                {depotcarte.liste_objet.length} article
+                                {depotcarte.liste_objet.length > 1 ? 's' : ''}
+                                {' '}
+                                référencé
+                                {depotcarte.liste_objet.length > 1 ? 's' : ''}
+                            </td>
+                        </tr>
+                    </tfoot>
+
                 </table>
+                </div>
 
 
             </div>
@@ -194,7 +196,7 @@ function FicheDepot({ categorie, setCategorie }) {
             {!afficherFormulaire && (
 
                 <button
-                    className="btn-ajouter-objet"
+                    className="btn-primaire btn-ajouter-objet"
                     onClick={() => setAfficherFormulaire(true)}
                 >
                     Ajouter un objet

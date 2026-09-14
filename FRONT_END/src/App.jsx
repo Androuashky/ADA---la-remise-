@@ -1,8 +1,6 @@
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
 import { useState } from 'react';
-import SearchBar from './composants/SearchBar';
-// import SearchBar from './composants/SearchBar';
 import Identification from './pages/Identification';
 import ListeObjets from './pages/ListeObjets';
 import FicheObjet from './pages/FicheObjet';
@@ -40,7 +38,7 @@ export default function App() {
       {/* Colonne de droite : searchbar + page courante */}
       <div className="body">
         <header className="topbar">
-          <SearchBar />
+          {/* <SearchBar /> */}
           <BoutonNvDepot/>
         </header>
         <main className="content">
