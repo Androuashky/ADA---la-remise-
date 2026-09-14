@@ -216,29 +216,15 @@ function FicheDepot({ categorie, setCategorie }) {
 
             {afficherFormulaire && (
 
-                <>
-
-                    <button
-                        className="btn-annuler-objet"
-                        onClick={() => setAfficherFormulaire(false)}
-                    >
-                        Annuler
-                    </button>
-
-
-                    <FormulaireObjet
-                        categorie={categorie}
-                        setCategorie={setCategorie}
-                        onAjouteObjet={() => {
-
-                            setAfficherFormulaire(false)
-
-                            setRafraichir(rafraichir + 1)
-
-                        }}
-                    />
-
-                </>
+                <FormulaireObjet
+                    categorie={categorie}
+                    setCategorie={setCategorie}
+                    onAjouteObjet={() => {
+                        setAfficherFormulaire(false)
+                        setRafraichir(rafraichir + 1)
+                    }}
+                    onAnnuler={() => setAfficherFormulaire(false)}
+                />
 
             )}
 

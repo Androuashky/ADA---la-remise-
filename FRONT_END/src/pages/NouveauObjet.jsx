@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import Categorie from '../components/Categorie';
 import './NouveauObjet.css'
 
-function FormulaireObjet({categorie, setCategorie, onAjouteObjet}) {
+function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {
   
     const [libelle, setLibelle] = useState('')
     const [poids_kg, setPoids_kg] = useState('')
@@ -267,13 +267,21 @@ function FormulaireObjet({categorie, setCategorie, onAjouteObjet}) {
 
 
             {/* BOUTON */}
-            <div className="actions-formulaire">
+           <div className="actions-formulaire">
 
                 <button
                     className="btn-valider-objet"
                     type="submit"
                 >
                     Ajouter l'objet
+                </button>
+
+                <button
+                    className="btn-annuler-objet"
+                    type="button"
+                    onClick={onAnnuler}
+                >
+                    Annuler
                 </button>
 
             </div>

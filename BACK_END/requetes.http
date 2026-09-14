@@ -5,6 +5,8 @@
 # ---------------------------------------------
 #   GET /api/objets
 # ---------------------------------------------
+### 200 -Lister personne(donnateur)
+GET http://localhost:3000/api/personnes
 
 ### 200 - Liste des objets sans filtre
 GET http://localhost:3000/api/objets?statut=&categorie_id=
