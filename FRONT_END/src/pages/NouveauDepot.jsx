@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import Donnateur from '../components/Donnateur';
+import Donnateur from '../composants/Donnateur';
 import './NouveauDepot.css'
  
 

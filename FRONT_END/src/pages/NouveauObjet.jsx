@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import Categorie from '../components/Categorie';
+import Categorie from '../composants/Categorie';
 import './NouveauObjet.css'
 
 function FormulaireObjet({categorie, setCategorie, onAjouteObjet, onAnnuler}) {

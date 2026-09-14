@@ -151,48 +151,37 @@ function FicheDepot({ categorie, setCategorie }) {
 
                     <tbody>
 
-                        {depotcarte.liste_objet.map((objet, index) => (
+                        {depotcarte.liste_objet.map((objet, index) => {
+                            const objetId = depotcarte.liste_objet_id[index];
+                            return (
+                                <tr key={objetId}>
+                                    <td>
+                                        #OBJ-{String(objetId).padStart(3, '0')}
+                                    </td>
 
-                            <tr key={index}>
+                                    <td className="nom-objet">
+                                        {objet}
+                                    </td>
 
-                                <td>
-                                    #OBJ-{String(index + 1).padStart(3, '0')}
-                                </td>
+                                    <td>
+                                        {depotcarte.liste_objet_prix[index] !== null
+                                            ? `${depotcarte.liste_objet_prix[index]} €`
+                                            : '—'}
+                                    </td>
 
-
-                                <td className="nom-objet">
-
-                                    {objet}
-
-                                </td>
-
-
-                                <td>
-
-                                    {depotcarte.liste_objet_prix[index] !== null
-                                        ? `${depotcarte.liste_objet_prix[index]} €`
-                                        : '—'
-                                    }
-
-                                </td>
-
-
-                                <td>
-
-                                    <button
-                                        className="btn-voir-fiche"
-                                        onClick={() => {
-                                            // navigation vers la fiche objet plus tard
-                                        }}
-                                    >
-                                        👁 Voir la fiche
-                                    </button>
-
-                                </td>
-
-                            </tr>
-
-                        ))}
+                                    <td>
+                                        <button
+                                            className="btn-voir-fiche"
+                                            onClick={() => {
+                                                navigate(`/objets/${objetId}`);
+                                            }}
+                                        >
+                                            👁 Voir la fiche
+                                        </button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
 
                     </tbody>
 

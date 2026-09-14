@@ -1,19 +1,17 @@
 // src/App.jsx — le layout commun + la carte des routes
 import { Routes, Route, NavLink } from 'react-router';
 import { useState } from 'react';
-import SearchBar from './components/SearchBar';
+import SearchBar from './composants/SearchBar';
 // import SearchBar from './composants/SearchBar';
 import Identification from './pages/Identification';
 import ListeObjets from './pages/ListeObjets';
 import FicheObjet from './pages/FicheObjet';
 import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
-import NouveauDepot from './pages/NouveauDepot';
-import TableauDeBord from './pages/TableauDeBord';
 import FormulaireDepot from './pages/NouveauDepot';
-import styles from './App.module.css';
+import TableauDeBord from './pages/TableauDeBord';
 import FormulaireObjet from './pages/NouveauObjet';
-import BoutonNvDepot from './components/BoutonNvDepot';
+import BoutonNvDepot from './composants/BoutonNvDepot';
 import './App.css';
 
 export default function App() {
@@ -21,7 +19,7 @@ export default function App() {
   const [categorie, setCategorie] =  useState([])
 
   return (
-    <div className="page">
+      <div className="page">
       {/* Barre latérale gauche */}
       <aside className="sidebar">
         <div className="sidebar-header">
@@ -37,9 +35,10 @@ export default function App() {
           <NavLink to="/depots"         className={({ isActive }) => isActive ? "link active" : "link"}>🗳️ Dépôts</NavLink>
         </nav>
       </aside>
+    
 
       {/* Colonne de droite : searchbar + page courante */}
-      <div className="body>
+      <div className="body">
         <header className="topbar">
           <SearchBar />
           <BoutonNvDepot/>
@@ -57,6 +56,7 @@ export default function App() {
           </Routes>
         </main>
       </div>
-    </div>
-  );
-}
+    </div> 
+
+  )}
+
