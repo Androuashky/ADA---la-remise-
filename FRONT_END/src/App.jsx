@@ -9,7 +9,6 @@ import FicheObjet from './pages/FicheObjet';
 import DepotListe from './pages/DepotListe';
 import FicheDepot from './pages/FicheDepot';
 import FormulaireDepot from './pages/NouveauDepot';
-import TableauDeBord from './pages/TableauDeBord';
 import FormulaireObjet from './pages/NouveauObjet';
 import BoutonNvDepot from './composants/BoutonNvDepot';
 import './App.css';
