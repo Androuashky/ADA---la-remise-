@@ -41,6 +41,7 @@ objetsRouter.get("/:id", async (req, res, next) => {
           objet.statut,
           objet.poids_kg,
           objet.prix,
+          objet.etat_arrivee,
           categorie.libelle AS categorie_libelle,
           depot.type AS depot_type,
           depot.date_depot,

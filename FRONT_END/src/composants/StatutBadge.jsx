@@ -1,12 +1,5 @@
 import './StatutBadge.css';
-
-export const label_statut = {
-  arrive: "Arrivé",
-  en_reparation: "En réparation",
-  en_rayon: "En rayon",
-  recycle: "Recyclé",
-  vendu: "Vendu",
-};
+import { label_statut } from './labels';
 
 export default function StatutBadge({ statut }) {
 

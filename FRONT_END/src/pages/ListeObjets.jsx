@@ -1,7 +1,8 @@
 import './ListeObjets.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import StatutBadge, { label_statut } from '../composants/StatutBadge';
+import StatutBadge from '../composants/StatutBadge';
+import { label_statut } from '../composants/labels';
 
 const api_url = "http://localhost:3000/api";
 
