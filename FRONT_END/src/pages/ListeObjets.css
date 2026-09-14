@@ -1,0 +1,9 @@
+.main-container p {
+    color: #64748B;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.select-th {
+  font-size: 13px;
+}

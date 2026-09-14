@@ -1,0 +1,18 @@
+.form {
+  flex: 1;
+  max-width: 420px;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #eeeeee;
+}
+.input:focus {
+  outline: none;
+  border-color: #4F46E5;
+  background-color: #ffffff;
+}

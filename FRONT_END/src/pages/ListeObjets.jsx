@@ -1,105 +1,137 @@
-// src/pages/ListeObjets.jsx — domaine A : écran « Liste des objets »
+import './ListeObjets.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import { getObjets, getCategories, getStatuts } from '../api.js';
+import StatutBadge from '../composants/StatutBadge';
+import { label_statut } from '../composants/labels';
+
+const api_url = "http://localhost:3000/api";
 
 export default function ListeObjets() {
-  // --- 1. Les états ---
+  // États locaux : liste d'objets et valeurs sélectionnées
   const [objets, setObjets] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [statuts, setStatuts] = useState([]);
-  const [filtres, setFiltres] = useState({});
-  const [chargement, setChargement] = useState(true);
-  const [erreur, setErreur] = useState(null);
+  const [categorieFiltre, setCategorieFiltre] = useState('');
+  const [statutFiltre, setStatutFiltre] = useState('');
 
-  // --- 2. Chargement des options des filtres ---
+  // Chargement initial des objets depuis l'API
   useEffect(() => {
-    (async () => {
+    async function chargerObjets() {
       try {
-        const [cats, sts] = await Promise.all([getCategories(), getStatuts()]);
-        setCategories(cats);
-        setStatuts(sts);
-      } catch (e) {
-        setErreur(e.message);
+        const reponse = await fetch(`${api_url}/objets`);
+        const donnees = await reponse.json();
+        setObjets(donnees.resultats || donnees);
+      } catch (err) {
+        console.error('Erreur lors du chargement des objets :', err);
       }
-    })();
+    }
+
+    chargerObjets();
   }, []);
 
-  // --- 3. Chargement des objets (rejoué à chaque changement de filtres) ---
-  useEffect(() => {
-    (async () => {
-      setChargement(true);
-      try {
-        const resultat = await getObjets(filtres);
-        setObjets(resultat);
-        setErreur(null);
-      } catch (e) {
-        setErreur(e.message);
-      } finally {
-        setChargement(false);
-      }
-    })();
-  }, [filtres]);
+  // On récupère les catégories (map) en recréant une collection de valeurs uniques/élimine les doublons (new Set)
+  // et on nettoie les valeurs falsy (null, undefined, "", etc.)
+  const categoriesUniques = [
+    ...new Set(objets.map((o) => o.categorie_libelle).filter(Boolean))
+  ];
 
-  // --- 4. Le rendu, en 4 cas ---
-  if (chargement) {
-    return <p>Chargement…</p>;
-  }
+  // Pareil pour les statuts
+  const statutsUniques = [
+    ...new Set(objets.map((o) => o.statut).filter(Boolean))
+  ];
 
-  if (erreur) {
-    return (
-      <div>
-        <p style={{ color: 'red' }}>Erreur : {erreur}</p>
-        <button onClick={() => window.location.reload()}>Réessayer</button>
-      </div>
-    );
-  }
+  // On filtre le tableau : un objet est conservé uniquement si toutes les conditions (et) sont remplies
+  const objetsFiltres = objets.filter((objet) => {
+    // Vrai si le filtre catégorie est sur "Toutes" (ou vide) ou si la catégorie de l'objet correspond
+    const matchCategorie =
+      categorieFiltre === '' || objet.categorie_libelle === categorieFiltre;
+
+    // Pareil pour le statut
+    const matchStatut =
+      statutFiltre === '' || objet.statut === statutFiltre;
+
+    // L'objet est conservé si matchCategorie et matchStatut sont tous les deux vrais
+    return matchCategorie && matchStatut;
+  });
 
   return (
-    <div>
-      <h1>Liste des objets</h1>
+    <div className="main-container">
+      <h2 className="page-title">Liste des objets</h2>
+      <p>Gérez et suivez le statut de tous les objets enregistrés dans la Remise.</p>
 
-      {/* Filtres */}
-      <div>
-        <select
-          value={filtres.statut ?? ''}
-          onChange={(e) => setFiltres({ ...filtres, statut: e.target.value || undefined })}
-        >
-          <option value="">Tous les statuts</option>
-          {statuts.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
+      {/* Conteneur du tableau */}
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nom de l'objet</th>
+              
+              {/* Filtre Catégorie */}
+              <th>
+                <div className="th-filter">
+                  <span>Catégorie : </span>
+                  <select 
+                    value={categorieFiltre} 
+                    onChange={(e) => setCategorieFiltre(e.target.value)}
+                    className="select-th"
+                  >
+                    <option value="">Toutes</option>
+                    {categoriesUniques.map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+              </th>
 
-        <select
-          value={filtres.categorie_id ?? ''}
-          onChange={(e) =>
-            setFiltres({ ...filtres, categorie_id: e.target.value ? Number(e.target.value) : undefined })
-          }
-        >
-          <option value="">Toutes les catégories</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.libelle}
-            </option>
-          ))}
-        </select>
+              {/* Filtre Statut */}
+              <th>
+                <div className="th-filter">
+                  <span>Statut : </span>
+                  <select 
+                    value={statutFiltre} 
+                    onChange={(e) => setStatutFiltre(e.target.value)}
+                    className="select-th"
+                  >
+                    <option value="">Tous</option>
+                    {statutsUniques.map((statut) => (
+                      <option key={statut} value={statut}>{label_statut[statut] || statut}</option>
+                    ))}
+                  </select>
+                </div>
+              </th>
+
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {objetsFiltres.length > 0 ? (
+              objetsFiltres.map((objet) => (
+                <tr key={objet.id}>
+                  <td>#{objet.id}</td>
+                  <td><b>{objet.libelle}</b></td>
+                  <td>{objet.categorie_libelle}</td>
+                  <td><StatutBadge statut={objet.statut} /></td>
+                  <td>
+                    <Link to={`/objets/${objet.id}`} className="btn">Voir la fiche</Link>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5} style={{ textAlign: 'center', color: '#6b7280', padding: '24px' }}>
+                  Aucun objet ne correspond à cette combinaison de filtres.
+                </td>
+              </tr>
+            )}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={5}>
+                {objetsFiltres.length} {objetsFiltres.length > 1 ? 'objets trouvés' : 'objet trouvé'}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
-
-      {/* Liste */}
-      {objets.length === 0 ? (
-        <p>Aucun objet ne correspond à ces filtres.</p>
-      ) : (
-        <ul>
-          {objets.map((objet) => (
-            <li key={objet.id}>
-              <Link to={`/objets/${objet.id}`}>{objet.libelle}</Link> — {objet.statut}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
