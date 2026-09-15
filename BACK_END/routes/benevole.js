@@ -14,7 +14,7 @@ const benevoleRouter = Router();
 benevoleRouter.get("/", async (req, res, next) => {
     try {
         const result = await pool.query(`
-            SELECT nom, prenom
+            SELECT id, nom, prenom
             FROM benevole
             ORDER BY nom ASC;
         `);
