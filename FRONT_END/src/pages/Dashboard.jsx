@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import StatutBadge from "../composants/StatutBadge";
 import "../composants/Fiche.css";
 import "./Dashboard.css";
@@ -81,7 +82,7 @@ function Dashboard() {
 
                 <div className="consultation-list">
 
-                    <div className="card consultation-card">
+                    <Link to="/objets" className="card consultation-card">
 
                         <div className="consultation-top">
 
@@ -100,9 +101,9 @@ function Dashboard() {
                             recyclé) et filtrez par catégorie.
                         </p>
 
-                    </div>
+                    </Link>
 
-                    <div className="card consultation-card">
+                    <Link to="/depots" className="card consultation-card">
 
                         <div className="consultation-top">
 
@@ -121,7 +122,7 @@ function Dashboard() {
                             attribuez les objets aux bénévoles.
                         </p>
 
-                    </div>
+                    </Link>
 
                 </div>
 
