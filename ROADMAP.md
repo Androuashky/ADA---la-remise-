@@ -1,0 +1,2 @@
+6. La roadmap — où vous en êtes dans les versions, ce que vous n'avez pas fait et pourquoi, ce que serait la suite.
+☐ un fichier ROADMAP.md : ce qui est livré, ce qui ne l'est pas, et ce que contiendrait la prochaine version

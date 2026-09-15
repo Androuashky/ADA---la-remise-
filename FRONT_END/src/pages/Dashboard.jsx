@@ -96,7 +96,7 @@ function Dashboard() {
                         </div>
 
                         <p>
-                            Consultez l'inventaire, modifiez les prix,
+                            Consultez l'inventaire,
                             changez les statuts (en rayon, vendu,
                             recyclé) et filtrez par catégorie.
                         </p>
@@ -118,8 +118,7 @@ function Dashboard() {
 
                         <p>
                             Suivez les lots apportés par les donateurs,
-                            créez de nouveaux reçus de dépôt et
-                            attribuez les objets aux bénévoles.
+                            créez de nouveaux de dépôt.
                         </p>
 
                     </Link>

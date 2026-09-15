@@ -19,7 +19,7 @@ C'est un projet de fin de Bloc 1, qui s'appuie sur une base de données (Adataba
 Projet réalisé en équipe de 3, chaque membre prenant en charge un domaine fonctionnel de bout en bout (base de données → API → interface) plutôt qu'une séparation front/back classique.
 
 | Domaine | Description | Responsable |
-|---|---|---|
+|---------|-------------|-------------|
 | A — Consulter le stock | Liste des objets, filtres, fiche détaillée
 | B — Faire entrer les objets | Enregistrer un dépôt, ajouter des objets 
 | C — Suivre la vie d'un objet | Identification, changement de statut 
@@ -30,7 +30,7 @@ Projet réalisé en équipe de 3, chaque membre prenant en charge un domaine fon
 - **Base de données** : PostgreSQL 16, lancée via Docker (`docker-compose.yml`)
 - **API** : Node.js + Express, avec le module `pg` (SQL écrit à la main, sans ORM)
 - **Front-end** : React (Vite) + React Router
-- **Tests API** : Thunder Client (collection de requêtes versionnée)
+- **Tests API** : REST Client (collection de requêtes versionnée)
 - **Documentation API** : Swagger
 - **Gestion de projet** : Git / GitHub (branches, pull requests, relectures)
 
