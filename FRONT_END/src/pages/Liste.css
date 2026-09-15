@@ -8,7 +8,6 @@
   margin-bottom: 50px;
 }
 
-/* En-tête de colonne : label seul ou label + filtre */
 .th-filter {
   font-size: 12px;
   display: flex;
