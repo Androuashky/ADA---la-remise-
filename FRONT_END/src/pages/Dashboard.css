@@ -43,11 +43,25 @@
   border: 1px solid #e2e8f0;
   border-radius: 10px;
   text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-card:hover {
+  transform: rotate(-1deg);
+}
+
+.status-card .statut-badge {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.status-card:hover .statut-badge {
+  transform: scale(1.08);
 }
 
 .status-card .stat-value {
   margin-top: 12px;
-  color: #4f46e5;
+  color: #0F766E;
   font-size: 24px;
 }
 
@@ -62,12 +76,13 @@
 }
 
 .consultation-card {
+  box-shadow: 0 2px 8px rgba(23, 32, 42, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .consultation-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.15);
 }
 
 .consultation-card .consultation-title h3 {
@@ -91,6 +106,12 @@
 
 .consultation-title span {
   font-size: 25px;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.consultation-card:hover .consultation-title span {
+  transform: rotate(-10deg) scale(1.12);
 }
 
 .consultation-arrow {

@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import FormulaireDepot from "./pages/NouveauDepot";
 import FormulaireObjet from "./pages/NouveauObjet";
 import BoutonNvDepot from "./composants/BoutonNvDepot";
+import { getAvatarFor } from "./utils/avatars";
 
 import "./App.css";
 
@@ -34,6 +35,10 @@ function Layout({ benevole, setBenevole }) {
         navigate("/benevoles");
     }
 
+    const avatar = benevole
+        ? getAvatarFor(benevole.prenom, benevole.nom)
+        : null;
+
     return (
         <div className="page">
 
@@ -47,7 +52,7 @@ function Layout({ benevole, setBenevole }) {
                 <div className="sidebar-header">
                     <div className="logo-container">
                         <div className="logo-icon">
-                            A
+                            ♻️
                         </div>
 
                         <span className="logo-text">
@@ -62,10 +67,17 @@ function Layout({ benevole, setBenevole }) {
 
                 <div className="benevole-info">
 
-                    {/* Initiales */}
-                    <div className="benevole-initiales">
-                        {benevole?.prenom?.[0]}
-                        {benevole?.nom?.[0]}
+                    {/* Avatar */}
+                    <div
+                        className="benevole-initiales"
+                        style={avatar && {
+                            backgroundColor: avatar.couleur.fond,
+                            color: avatar.couleur.texte,
+                        }}
+                    >
+                        {avatar ? avatar.emoji : (
+                            <>{benevole?.prenom?.[0]}{benevole?.nom?.[0]}</>
+                        )}
                     </div>
 
                     {/* Nom + rôle */}

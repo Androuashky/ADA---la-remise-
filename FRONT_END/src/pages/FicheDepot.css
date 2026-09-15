@@ -33,8 +33,14 @@
 }
 
 .carte-tableau .table-container {
-  border-color: #e2e8f0;
-  border-radius: 12px;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.carte-tableau table {
+  background: #fff;
 }
 
 .tableau-entete {

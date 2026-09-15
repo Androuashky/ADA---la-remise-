@@ -2,7 +2,7 @@ import './Liste.css'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import StatutBadge from '../composants/StatutBadge';
-import { label_statut } from '../composants/labels';
+import { label_statut } from '../utils/labels';
 
 const api_url = "http://localhost:3000/api";
 
@@ -54,7 +54,7 @@ export default function ListeObjets() {
 
   return (
     <div className="main-container">
-      <h2 className="page-title">Liste des objets</h2>
+      <h2 className="page-title">Gestion des objets</h2>
       <p>Gérez et suivez le statut de tous les objets enregistrés dans la Remise.</p>
 
       {/* Conteneur du tableau */}
