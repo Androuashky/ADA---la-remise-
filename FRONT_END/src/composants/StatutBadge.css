@@ -1,37 +1,48 @@
-/* Style de base du badge */
+/* Style de base du badge (pill, avec pastille d'état) */
 .statut-badge {
-  padding: 8px 12px;
-  border-radius: 30px;
+  padding: 8px 14px;
+  border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   display: inline-block;
   text-align: center;
   border: 1px solid;
   border-color: color-mix(in srgb, currentColor 30%, transparent);
 }
 
-/* Couleurs par statut */
+.statut-badge::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* Couleurs pastel par statut (esprit recyclage enjoué) */
 .statut-badge.recycle {
-  background-color: #e6f4ea;
-  color: #137333;
+  background-color: #E7F6D7;
+  color: #3F6212;
 }
 
 .statut-badge.en_reparation {
-  background-color: #fef7e0;
-  color: #b06000;
+  background-color: #FEF9C3;
+  color: #854D0E;
 }
 
 .statut-badge.vendu {
-  background-color: #e8f0fe;
-  color: #1a73e8;
+  background-color: #DBEAFE;
+  color: #1D4ED8;
 }
 
 .statut-badge.arrive {
-  background-color: #fce8e6;
-  color: #c5221f;
+  background-color: #FFE4E6;
+  color: #BE123C;
 }
 
 .statut-badge.en_rayon {
-  background-color: #f1f3f4;
-  color: #5f6368;
+  background-color: #EEF1F0;
+  color: #475569;
 }

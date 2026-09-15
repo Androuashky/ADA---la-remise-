@@ -1,4 +1,4 @@
-// src/labels.js — libellés français des enums de la base
+// utils/labels.js — libellés français des enums de la base
 export const label_statut = {
   arrive: "Arrivé",
   en_reparation: "En réparation",

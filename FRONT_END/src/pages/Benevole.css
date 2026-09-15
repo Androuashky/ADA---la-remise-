@@ -1,36 +1,42 @@
 /* Benevole.css — mise en page de la page de sélection.
-   Le rendu (logo, page-title, champ-form, card) est fourni
+   Le rendu (page-title, champ-form, card) est fourni
    par App.css / Fiche.css. */
 
 .benevole-page {
   min-height: 100vh;
-  padding: 30px;
+  background-color: #F7F6F3;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+/* Barre supérieure dans les couleurs de la sidebar de l'app */
+.benevole-topbar {
+  height: 64px;
+  background-color: #1E3A5F;
+  display: flex;
   align-items: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.benevole-topbar .logo-icon {
+  width: 35px;
+  height: 35px;
+  background-color: #ffffff;
+  color: #1E3A5F;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .benevole-container {
+  flex: 1;
   width: 100%;
   max-width: 1100px;
+  margin: 0 auto;
   padding: 45px 70px;
   text-align: center;
-}
-
-/* Logo : hérite de .logo-container /.logo-icon /.logo-text (App.css) */
-/* avec des couleurs adaptées à ce fond clair */
-.benevole-container .logo-container {
-  justify-content: center;
-  margin-bottom: 55px;
-}
-
-.benevole-container .logo-icon {
-  background-color: #4f46e5;
-  color: #ffffff;
-}
-
-.benevole-container .logo-text {
-  color: #0f172a;
+  box-sizing: border-box;
 }
 
 .benevole-container .page-title {
@@ -46,6 +52,7 @@
 .search {
   width: 320px;
   margin-bottom: 28px;
+  border-radius: 999px;
 }
 
 .benevole-list {
@@ -60,12 +67,12 @@
   min-height: 165px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(23, 32, 42, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .benevole-card:hover {
-  border-color: #4f46e5;
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.15);
   transform: translateY(-2px);
 }
 
@@ -74,27 +81,31 @@
   font-size: 14px;
 }
 
-.initiales {
+.benevole-avatar {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   margin: 0 auto 15px;
-  background-color: #e0e7ff;
-  color: #4f46e5;
   border-radius: 50%;
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 26px;
+  box-shadow: 0 2px 6px rgba(23, 32, 42, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.benevole-card:hover .benevole-avatar {
+  transform: rotate(-10deg) scale(1.12);
 }
 
 .role {
   display: inline-block;
-  padding: 4px 9px;
-  background-color: #eef0f3;
-  color: #747985;
-  border-radius: 10px;
-  font-size: 10px;
+  padding: 6px 14px;
+  background-color: #DDEDEA;
+  color: #334155;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .footer {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 import "../composants/Fiche.css";
 import "./Benevole.css";
+import { getAvatarFor } from "../utils/avatars";
 
 function Benevole({ setBenevole }) {
 
@@ -59,15 +60,17 @@ function Benevole({ setBenevole }) {
 
         <div className="benevole-page">
 
-            <div className="benevole-container">
-
+            <header className="benevole-topbar">
                 <div className="logo-container">
-                    <div className="logo-icon">A</div>
+                    <div className="logo-icon">♻️</div>
                     <span className="logo-text">
                         AdaRemise
                     </span>
                 </div>
+            </header>
 
+
+            <div className="benevole-container">
 
                 <h1 className="page-title">
                     Bienvenue à la Remise
@@ -96,37 +99,48 @@ function Benevole({ setBenevole }) {
 
                 <div className="benevole-list">
 
-                    {benevoleFiltres.map((benevole) => (
+                    {benevoleFiltres.map((benevole, index) => {
 
-                        <div
-                            className="benevole-card card"
-                            key={benevole.id}
-                            onClick={() =>
-                                handleClicProfil(benevole)
-                            }
-                        >
+                        const { emoji, couleur } = getAvatarFor(benevole.prenom, benevole.nom);
 
-                            <div className="initiales">
+                        return (
 
-                                {benevole.prenom[0]}
-                                {benevole.nom[0]}
+                            <div
+                                className="benevole-card card"
+                                key={index}
+                                onClick={() =>
+                                    handleClicProfil(benevole)
+                                }
+                            >
+
+                                <div
+                                    className="benevole-avatar"
+                                    style={{
+                                        backgroundColor: couleur.fond,
+                                        color: couleur.texte,
+                                    }}
+                                >
+
+                                    {emoji}
+
+                                </div>
+
+
+                                <h2>
+                                    {benevole.prenom}{" "}
+                                    {benevole.nom}
+                                </h2>
+
+
+                                <span className="role">
+                                    👤 Bénévole
+                                </span>
 
                             </div>
 
+                        );
 
-                            <h2>
-                                {benevole.prenom}{" "}
-                                {benevole.nom}
-                            </h2>
-
-
-                            <span className="role">
-                                👤 Bénévole
-                            </span>
-
-                        </div>
-
-                    ))}
+                    })}
 
                 </div>
 

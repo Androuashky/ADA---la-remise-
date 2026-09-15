@@ -1,5 +1,5 @@
 import './StatutBadge.css';
-import { label_statut } from './labels';
+import { label_statut } from '../utils/labels';
 
 export default function StatutBadge({ statut }) {
 

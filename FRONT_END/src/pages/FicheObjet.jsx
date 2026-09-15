@@ -3,7 +3,7 @@ import './FicheObjet.css';
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
 import StatutBadge from '../composants/StatutBadge';
-import { label_statut, label_etat } from '../composants/labels';
+import { label_statut, label_etat } from '../utils/labels';
 
 
 const api_url = "http://localhost:3000/api";
