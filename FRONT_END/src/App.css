@@ -266,7 +266,6 @@ p.gestion-section {
   margin: 0 0 8px;
 }
 
-/* Titre de section (bloc de cartes) */
 .section-title {
   font-size: 20px;
   font-weight: 700;
@@ -274,7 +273,6 @@ p.gestion-section {
   margin: 0 0 20px;
 }
 
-/* Carte blanche générique */
 .card {
   background: #ffffff;
   border: none;
@@ -291,7 +289,6 @@ p.gestion-section {
   border-bottom: 1px solid #EDF0F3;
 }
 
-/* Lien retour de fiche */
 .btn-retour {
   display: inline-block;
   color: #64748B;
@@ -305,7 +302,6 @@ p.gestion-section {
   text-decoration: underline;
 }
 
-/* Bouton d'action principal (pills) */
 .btn-primaire {
   padding: 12px;
   border-radius: 999px;
@@ -327,7 +323,6 @@ p.gestion-section {
   cursor: not-allowed;
 }
 
-/* Bouton d'action secondaire (bordure, pill) */
 .btn-secondaire {
   padding: 12px;
   border-radius: 999px;
@@ -350,7 +345,6 @@ p.gestion-section {
   cursor: not-allowed;
 }
 
-/* Bouton d'action neutre (annulation, actions passives, pill) */
 .btn-neutre {
   padding: 12px;
   border-radius: 999px;
@@ -366,7 +360,6 @@ p.gestion-section {
   background: #f1f5f9;
 }
 
-/* Bouton d'action discrète (liens « Voir la fiche », navigation ligne) */
 .btn-vignette {
   font-size: 14px;
   font-weight: 600;
@@ -382,7 +375,6 @@ p.gestion-section {
   text-decoration: underline;
 }
 
-/* Bouton de base (liens stylés en boutons) */
 .btn {
   padding: 6px 10px;
   border-radius: 8px;
@@ -407,7 +399,6 @@ p.gestion-section {
   border: 1px solid #64748B;
 }
 
-/* Tableau global */
 table {
   width: 100%;
   border-collapse: collapse;
