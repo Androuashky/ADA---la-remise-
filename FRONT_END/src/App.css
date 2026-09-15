@@ -59,13 +59,12 @@ font-family: 'Quicksand', sans-serif;
   gap: 10px;
 }
 
-.logo-icon {
+.logo-icon-app{
   width: 35px;
   height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
   color: #1E3A5F;
   border-radius: 8px;
   font-weight: bold;

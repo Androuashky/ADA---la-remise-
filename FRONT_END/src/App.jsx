@@ -51,9 +51,7 @@ function Layout({ benevole, setBenevole }) {
                 {/* LOGO */}
                 <div className="sidebar-header">
                     <div className="logo-container">
-                        <div className="logo-icon">
-                            ♻️
-                        </div>
+                        <img  src="../../public/logo-feuille.png"   className="logo-icon-app"></img>
 
                         <span className="logo-text">
                             AdaRemise

@@ -62,7 +62,6 @@ function Benevole({ setBenevole }) {
 
             <header className="benevole-topbar">
                 <div className="logo-container">
-                    <div className="logo-icon">♻️</div>
                     <span className="logo-text">
                         AdaRemise
                     </span>
@@ -71,6 +70,9 @@ function Benevole({ setBenevole }) {
 
 
             <div className="benevole-container">
+
+                <img  src="../../public/logo.png"   className="logo-icon"></img>
+
 
                 <h1 className="page-title">
                     Bienvenue à la Remise
