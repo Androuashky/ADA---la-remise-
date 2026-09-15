@@ -55,7 +55,7 @@ export default function ListeObjets() {
   return (
     <div className="main-container">
       <h2 className="page-title">Gestion des objets</h2>
-      <p>Gérez et suivez le statut de tous les objets enregistrés dans la Remise.</p>
+      <p>Gérez et suivez le statut de tous les objets enregistrés dans La Remise.</p>
 
       {/* Conteneur du tableau */}
       <div className="table-container">

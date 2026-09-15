@@ -75,7 +75,7 @@ function Benevole({ setBenevole }) {
 
 
                 <h1 className="page-title">
-                    Bienvenue à la Remise
+                    Bienvenue à La Remise
                 </h1>
                 <p className="fiche-subtitle">
                     Rien ne se perd, tout se réinvente !
