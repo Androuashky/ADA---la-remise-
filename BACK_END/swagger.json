@@ -1,0 +1,410 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API La Remise",
+    "version": "1.0.0",
+    "description": "API de gestion de la ressourcerie La Remise"
+  },
+
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+
+  "tags": [
+    {
+      "name": "Catégories",
+      "description": "Gestion des catégories"
+    },
+    {
+      "name": "Objets",
+      "description": "Gestion des objets"
+    },
+    {
+      "name": "Statuts",
+      "description": "Gestion des statuts"
+    },
+    {
+      "name": "Personnes",
+      "description": "Gestion des personnes"
+    },
+    {
+      "name": "Dépôts",
+      "description": "Gestion des dépôts"
+    },
+    {
+      "name": "Bénévoles",
+      "description": "Gestion des bénévoles"
+    },
+    {
+      "name": "Statistiques",
+      "description": "Statistiques de la ressourcerie"
+    }
+  ],
+
+  "paths": {
+
+    "/categories": {
+      "get": {
+        "tags": ["Catégories"],
+        "summary": "Liste toutes les catégories",
+        "responses": {
+          "200": {
+            "description": "La liste des catégories"
+          }
+        }
+      }
+    },
+
+    "/objets": {
+      "get": {
+        "tags": ["Objets"],
+        "summary": "Liste les objets avec des filtres optionnels",
+        "parameters": [
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtrer les objets par statut"
+          },
+          {
+            "name": "categorie_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filtrer les objets par catégorie"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "La liste des objets"
+          }
+        }
+      }
+    },
+
+    "/objets/{id}": {
+      "get": {
+        "tags": ["Objets"],
+        "summary": "Récupère un objet par son identifiant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Identifiant de l'objet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "L'objet trouvé"
+          },
+          "404": {
+            "description": "Objet non trouvé"
+          }
+        }
+      }
+    },
+
+    "/objets/{id}/statut": {
+      "patch": {
+        "tags": ["Objets"],
+        "summary": "Modifie le statut d'un objet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Identifiant de l'objet"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "statut": {
+                    "type": "string"
+                  },
+                  "prix": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Objet modifié"
+          },
+          "400": {
+            "description": "Statut manquant ou invalide"
+          },
+          "404": {
+            "description": "Objet non trouvé"
+          }
+        }
+      }
+    },
+
+    "/statuts": {
+      "get": {
+        "tags": ["Statuts"],
+        "summary": "Liste tous les statuts",
+        "responses": {
+          "200": {
+            "description": "La liste des statuts"
+          }
+        }
+      }
+    },
+
+    "/personnes": {
+      "get": {
+        "tags": ["Personnes"],
+        "summary": "Liste toutes les personnes",
+        "responses": {
+          "200": {
+            "description": "La liste des personnes"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Personnes"],
+        "summary": "Crée une nouvelle personne",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nom": {
+                    "type": "string"
+                  },
+                  "prenom": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "adherente": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Personne créée"
+          },
+          "400": {
+            "description": "Nom ou prénom manquant"
+          }
+        }
+      }
+    },
+
+    "/depots": {
+      "get": {
+        "tags": ["Dépôts"],
+        "summary": "Liste tous les dépôts",
+        "responses": {
+          "200": {
+            "description": "La liste des dépôts"
+          }
+        }
+      },
+
+      "post": {
+        "tags": ["Dépôts"],
+        "summary": "Crée un nouveau dépôt",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personne_id": {
+                    "type": "integer"
+                  },
+                  "date_depot": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dépôt créé"
+          },
+          "400": {
+            "description": "Identifiant de personne ou type manquant"
+          }
+        }
+      }
+    },
+
+    "/depots/{id}": {
+      "get": {
+        "tags": ["Dépôts"],
+        "summary": "Récupère un dépôt par son identifiant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Identifiant du dépôt"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Le dépôt trouvé"
+          },
+          "404": {
+            "description": "Dépôt non trouvé"
+          }
+        }
+      }
+    },
+
+    "/depots/{id}/objets": {
+      "post": {
+        "tags": ["Dépôts"],
+        "summary": "Ajoute un objet à un dépôt",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Identifiant du dépôt"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "libelle": {
+                    "type": "string"
+                  },
+                  "poids_kg": {
+                    "type": "number"
+                  },
+                  "etat_arrivee": {
+                    "type": "string"
+                  },
+                  "statut": {
+                    "type": "string"
+                  },
+                  "prix": {
+                    "type": "number"
+                  },
+                  "date_mise_rayon": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "categorie_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Objet créé"
+          },
+          "400": {
+            "description": "Données manquantes ou invalides"
+          },
+          "404": {
+            "description": "Dépôt non trouvé"
+          }
+        }
+      }
+    },
+
+    "/benevoles": {
+      "get": {
+        "tags": ["Bénévoles"],
+        "summary": "Liste tous les bénévoles",
+        "responses": {
+          "200": {
+            "description": "La liste des bénévoles"
+          }
+        }
+      }
+    },
+
+    "/stats/par-statut": {
+      "get": {
+        "tags": ["Statistiques"],
+        "summary": "Compte les objets par statut",
+        "responses": {
+          "200": {
+            "description": "Le nombre d'objets pour chaque statut"
+          }
+        }
+      }
+    },
+
+    "/stats/poids-total": {
+      "get": {
+        "tags": ["Statistiques"],
+        "summary": "Calcule le poids total des objets",
+        "responses": {
+          "200": {
+            "description": "Le poids total des objets reçus en kilogrammes"
+          }
+        }
+      }
+    },
+
+    "/stats/en-rayon": {
+      "get": {
+        "tags": ["Statistiques"],
+        "summary": "Compte les objets en rayon",
+        "responses": {
+          "200": {
+            "description": "Le nombre d'objets actuellement en rayon"
+          }
+        }
+      }
+    }
+  }
+}
