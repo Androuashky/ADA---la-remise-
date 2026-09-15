@@ -126,6 +126,11 @@
   line-height: 1.6;
 }
 
+.consultation-card {
+    text-decoration: none;
+    color: inherit;
+}
+
 @media (max-width: 900px) {
   .stats-cards {
     grid-template-columns: 1fr;
